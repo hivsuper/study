@@ -190,7 +190,6 @@
         <version>2.1</version>
         <configuration>
           <uriEncoding>UTF-8</uriEncoding>
-          <warDirectory>${project.build.directory}/study-local</warDirectory>
           <path>/study</path>
         </configuration>
       </plugin>
