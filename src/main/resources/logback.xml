@@ -1,16 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
-  <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
-    <encoder>
-      <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n
-      </pattern>
+  <property name="maxHistory" value="5" />
+  <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+      <FileNamePattern>logs/companies-%d{yyyy-MM-dd}.log</FileNamePattern>
+      <MaxHistory>${maxHistory}</MaxHistory>
+      <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+        <maxFileSize>100MB</maxFileSize>
+      </timeBasedFileNamingAndTriggeringPolicy>
+    </rollingPolicy>
+    <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+      <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{500} - %msg%n</pattern>
+      <charset>UTF-8</charset>
+      <immediateFlush>true</immediateFlush>
     </encoder>
   </appender>
-  <logger name="com.lxp.company">
-    <level value="DEBUG" />
-    <appender-ref ref="STDOUT" />
-  </logger>
-  <root level="DEBUG">
-    <appender-ref ref="STDOUT" />
+  <root level="INFO">
+    <appender-ref ref="FILE" />
   </root>
 </configuration>

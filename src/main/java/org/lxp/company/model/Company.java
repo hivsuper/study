@@ -11,6 +11,7 @@ public class Company implements Comparable<Company> {
   private String phone;
   private String linkMan;
   private long updateTime;
+  private String contactInfo;
 
   public String getName() {
     return name;
@@ -52,6 +53,14 @@ public class Company implements Comparable<Company> {
     this.updateTime = updateTime;
   }
 
+  public String getContactInfo() {
+    return contactInfo;
+  }
+
+  public void setContactInfo(String contactInfo) {
+    this.contactInfo = contactInfo;
+  }
+
   @JsonIgnore
   public Date getUpdateDate() {
     Calendar c = Calendar.getInstance();
@@ -61,7 +70,8 @@ public class Company implements Comparable<Company> {
 
   @Override
   public String toString() {
-    return "Company [name=" + name + ", link=" + link + ", phone=" + phone + ", updateTime=" + updateTime + "]";
+    return "Company [name=" + name + ", link=" + link + ", phone=" + phone + ", linkMan=" + linkMan + ", updateTime="
+        + updateTime + ", contactInfo=" + contactInfo + "]";
   }
 
   public int compareTo(Company o) {

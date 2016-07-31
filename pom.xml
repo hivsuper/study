@@ -4,7 +4,7 @@
   <groupId>org.lxp</groupId>
   <artifactId>companies</artifactId>
   <packaging>war</packaging>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>develop-SNAPSHOT</version>
   <name>companies Maven Webapp</name>
   <url>http://mvnrepository.com/</url>
 
@@ -103,19 +103,6 @@
               <warSourceExcludes>WEB-INF/lib/servlet-*</warSourceExcludes>
             </configuration>
           </execution>
-          <execution>
-            <id>local-package</id>
-            <phase>package</phase>
-            <goals>
-              <goal>exploded</goal>
-            </goals>
-            <configuration>
-              <primaryArtifact>false</primaryArtifact>
-              <webappDirectory>${project.build.directory}/companies-local</webappDirectory>
-              <archiveClasses>true</archiveClasses>
-              <warSourceExcludes>WEB-INF/lib/servlet-*</warSourceExcludes>
-            </configuration>
-          </execution>
         </executions>
       </plugin>
       <plugin>
@@ -123,7 +110,6 @@
         <artifactId>tomcat7-maven-plugin</artifactId>
         <version>2.1</version>
         <configuration>
-          <warDirectory>${project.build.directory}/companies-local</warDirectory>
           <path>/companies</path>
         </configuration>
       </plugin>

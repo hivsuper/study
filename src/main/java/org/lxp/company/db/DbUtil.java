@@ -6,41 +6,66 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
 import org.lxp.company.model.Company;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class DbUtil {
-  private static final String DB_BASE_PATH = "D:";
-  private static final String FOSHAN_PATH = DB_BASE_PATH + "/foshan.txt";
-  private static final String HUICONG_PATH = DB_BASE_PATH + "/huicong.txt";
+  private static final Logger LOG = LoggerFactory.getLogger(DbUtil.class);
+  private static DbUtil dbUtil;
+  private static String FOSHAN_PATH;
+  private static String HUICONG_PATH;
 
-  public static Set<String> readFoshanLinkSet() throws IOException {
+  private DbUtil(String path) {
+    FOSHAN_PATH = path + "/foshan.txt";
+    HUICONG_PATH = path + "/huicong.txt";
+  }
+
+  public static synchronized DbUtil initialize(String path) {
+    if (dbUtil == null) {
+      dbUtil = new DbUtil(path);
+      LOG.info("FYI: {} and {}", FOSHAN_PATH, HUICONG_PATH);
+    }
+    return dbUtil;
+  }
+
+  public static DbUtil getInstance() {
+    if (dbUtil == null) {
+      throw new IllegalArgumentException("DbUtil has not been initialized");
+    }
+    return dbUtil;
+  }
+
+  public Set<String> readFoshanLinkSet() throws IOException {
     return readSet2Cache(FOSHAN_PATH);
   }
 
-  public static Set<String> readHuicongLinkSet() throws IOException {
+  public Set<String> readHuicongLinkSet() throws IOException {
     return readSet2Cache(HUICONG_PATH);
   }
 
-  public static List<Company> readFile() throws IOException {
+  public List<Company> readFile() throws IOException {
     List<Company> companies = readFile2Cache(FOSHAN_PATH);
     companies.addAll(readFile2Cache(HUICONG_PATH));
     Collections.sort(companies);
     return companies;
   }
 
-  public static void flushFile() throws IOException {
+  public void flushFile() throws IOException {
     List<Company> companies = FetchCompanyUtil.foshan();
     if (!companies.isEmpty()) {
       companies.addAll(readFile2Cache(FOSHAN_PATH));
-      flushCache2File(companies, FOSHAN_PATH);
+      flushCache2File(clearOldCompanies(companies), FOSHAN_PATH);
     }
 
     companies.clear();
@@ -48,11 +73,11 @@ public class DbUtil {
     companies = FetchCompanyUtil.huicong();
     if (!companies.isEmpty()) {
       companies.addAll(readFile2Cache(HUICONG_PATH));
-      flushCache2File(companies, HUICONG_PATH);
+      flushCache2File(clearOldCompanies(companies), HUICONG_PATH);
     }
   }
 
-  private static Set<String> readSet2Cache(String path) throws IOException {
+  private Set<String> readSet2Cache(String path) throws IOException {
     File file = new File(path);
     if (!file.exists()) {
       file.createNewFile();
@@ -71,7 +96,7 @@ public class DbUtil {
     return linkSet;
   }
 
-  private static List<Company> readFile2Cache(String path) throws IOException {
+  private List<Company> readFile2Cache(String path) throws IOException {
     File file = new File(path);
     if (!file.exists()) {
       file.createNewFile();
@@ -87,13 +112,27 @@ public class DbUtil {
     return companies;
   }
 
-  private static void flushCache2File(List<Company> companies, String path) throws IOException {
+  private void flushCache2File(List<Company> companies, String path) throws IOException {
     BufferedWriter writer = new BufferedWriter(new FileWriter(path));
     writer.write(new ObjectMapper().writeValueAsString(companies));
     writer.close();
   }
 
+  private List<Company> clearOldCompanies(List<Company> companies) {
+    Iterator<Company> it = companies.iterator();
+    while (it.hasNext()) {
+      Company company = it.next();
+      Calendar calendar = Calendar.getInstance();
+      calendar.add(Calendar.MONTH, -1);
+      if (company.getUpdateDate().before(calendar.getTime())) {// 清除一个月前的记录
+        it.remove();
+      }
+    }
+    return companies;
+  }
+
   public static void main(String[] args) throws IOException {
-    flushFile();
+    DbUtil dbUtil = initialize("D:");
+    dbUtil.flushFile();
   }
 }
