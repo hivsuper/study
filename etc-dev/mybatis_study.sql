@@ -89,7 +89,7 @@ CREATE TABLE IF NOT EXISTS `post_tag` (
   `post_id` int(11) NOT NULL,
   `tag_id` int(11) NOT NULL,
   PRIMARY KEY (`post_id`,`tag_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='文章标签关系表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='文章标签关系表';
 
 -- Dumping data for table mybatis_study.post_tag: ~0 rows (approximately)
 /*!40000 ALTER TABLE `post_tag` DISABLE KEYS */;
