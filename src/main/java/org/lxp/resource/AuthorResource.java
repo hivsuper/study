@@ -34,7 +34,7 @@ public class AuthorResource {
 
   @POST
   @Path("/add")
-  @ApiOperation(value = "添加作者, 学习XML映身文件")
+  @ApiOperation(value = "添加作者, 学习XML映射文件")
   public Response add(@ApiParam(value = "用户名") @QueryParam("username") final String username,
       @ApiParam(value = "密码") @QueryParam("password") final String password) {
     LOG.info("{} {}", username, password);
