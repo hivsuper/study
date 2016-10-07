@@ -1,6 +1,10 @@
 # jersey2demo
 jersey2+mybatis for study.
 
+OS : Windows 10
+
+JAVA ： Java1.7
+
 For refrence: 
 http://www.mybatis.org/mybatis-3/zh/sqlmap-xml.html
 
