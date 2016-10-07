@@ -17,7 +17,8 @@
   </bean>
   <!-- 数据源 -->
   <!-- Hikari Datasource -->
-  <bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="shutdown">
+  <bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
+	<property name="driverClassName" value="${db.driver}" /> 
     <property name="jdbcUrl" value="${db.url}" />
     <property name="username" value="${db.username}" />
     <property name="password" value="${db.password}" />

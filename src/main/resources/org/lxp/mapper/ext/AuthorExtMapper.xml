@@ -5,7 +5,7 @@
     <bind name="keyword" value="'%'+keyword+'%'"/>
     SELECT * FROM author
     <where>
-      AND keyword LIKE #{keyword}
+      AND username LIKE #{keyword}
     </where>
   </select>
 </mapper>

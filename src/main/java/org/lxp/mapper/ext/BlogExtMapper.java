@@ -4,6 +4,6 @@ import org.apache.ibatis.annotations.Select;
 import org.lxp.model.Blog;
 
 public interface BlogExtMapper {
-  @Select("SELECT * FROM blog WHERE id = #{id}")
+  @Select("SELECT id, title, create_time AS createTime FROM blog WHERE id = #{id}")
   Blog selectBlog(int id);
 }
