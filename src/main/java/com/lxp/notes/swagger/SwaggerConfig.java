@@ -17,19 +17,19 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 public class SwaggerConfig {
 
-	@Bean
-	public Docket swaggerSpringfoxDocket() {
-		StopWatch watch = new StopWatch();
-		watch.start();
-		Docket swaggerSpringMvcPlugin = new Docket(DocumentationType.SWAGGER_2).apiInfo(apiInfo())
-				.genericModelSubstitutes(ResponseEntity.class).select().paths(regex(".*?")).build();
-		watch.stop();
-		return swaggerSpringMvcPlugin;
-	}
+    @Bean
+    public Docket swaggerSpringfoxDocket() {
+        StopWatch watch = new StopWatch();
+        watch.start();
+        Docket swaggerSpringMvcPlugin = new Docket(DocumentationType.SWAGGER_2).apiInfo(apiInfo())
+                .genericModelSubstitutes(ResponseEntity.class).select().paths(regex(".*?")).build();
+        watch.stop();
+        return swaggerSpringMvcPlugin;
+    }
 
-	private ApiInfo apiInfo() {
-		return new ApiInfoBuilder().title("bond-document API Title").description("bond-document API Description")
-				.termsOfServiceUrl("bond-document API terms of service").license("bond-document API Licence")
-				.licenseUrl("bond-document API License URL").build();
-	}
+    private ApiInfo apiInfo() {
+        return new ApiInfoBuilder().title("java-notes API Title").description("java-notes API Description")
+                .termsOfServiceUrl("java-notes API terms of service").license("java-notes API Licence")
+                .licenseUrl("java-notes API License URL").build();
+    }
 }
