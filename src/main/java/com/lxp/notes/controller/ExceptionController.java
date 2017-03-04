@@ -69,9 +69,10 @@ public class ExceptionController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "7-yes", method = GET)
+    @RequestMapping(value = "7-no", method = GET)
     @ApiOperation(value = "禁止在 finally 块中使用 return")
-    public void _二_7_yes() {
+    public String _二_7_no() {
+        return exceptionService._二_7_no(1);
     }
 
     @ResponseBody

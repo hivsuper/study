@@ -45,6 +45,21 @@ public class ExceptionService {
         return rtn;
     }
 
+    @SuppressWarnings("finally")
+    public String _二_7_no(int flag) {
+        String rtn = "This is 2.7";
+        try {
+            if (flag > 0) {
+                throw new BaseException("测试一下");
+            }
+            return rtn;
+        } catch (Exception e) {
+            return rtn;
+        } finally {
+            return "ops!!!";
+        }
+    }
+
     public void _二_6_yes() throws IOException {
         BufferedWriter writer = null;
         try {
