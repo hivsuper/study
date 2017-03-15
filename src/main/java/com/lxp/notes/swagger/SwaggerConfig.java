@@ -28,8 +28,7 @@ public class SwaggerConfig {
     }
 
     private ApiInfo apiInfo() {
-        return new ApiInfoBuilder().title("java-notes API Title").description("java-notes API Description")
-                .termsOfServiceUrl("java-notes API terms of service").license("java-notes API Licence")
-                .licenseUrl("java-notes API License URL").build();
+        return new ApiInfoBuilder().title("java-notes API").description("java-notes API 说明书").termsOfServiceUrl(null)
+                .license("测试").licenseUrl(null).build();
     }
 }

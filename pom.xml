@@ -23,13 +23,13 @@
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>4.7</version>
+      <version>4.12</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>javax.servlet</groupId>
-      <artifactId>servlet-api</artifactId>
-      <version>2.5</version>
+      <artifactId>javax.servlet-api</artifactId>
+      <version>3.1.0</version>
       <scope>provided</scope>
     </dependency>
 
@@ -99,6 +99,12 @@
       <artifactId>spring-web</artifactId>
       <version>${spring-version}</version>
     </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-test</artifactId>
+      <version>${spring-version}</version>
+      <scope>test</scope>
+    </dependency>
 
     <dependency>
       <groupId>org.springframework.security</groupId>
@@ -137,6 +143,12 @@
       <artifactId>springfox-swagger-ui</artifactId>
       <version>${springfox.version}</version>
     </dependency>
+    <dependency>
+      <groupId>io.springfox</groupId>
+      <artifactId>springfox-staticdocs</artifactId>
+      <version>${springfox.version}</version>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
   <build>
     <finalName>java-notes</finalName>
@@ -151,6 +163,34 @@
       </resource>
     </resources>
     <plugins>
+      <plugin>
+        <groupId>org.asciidoctor</groupId>
+        <artifactId>asciidoctor-maven-plugin</artifactId>
+        <version>1.5.3</version>
+        <configuration>
+          <sourceDirectory>src/docs/asciidoc</sourceDirectory>
+          <outputDirectory>target/generated-docs/${project.version}</outputDirectory>
+          <sourceDocumentName>index.adoc</sourceDocumentName>
+          <attributes>
+            <doctype>book</doctype>
+            <toc>left</toc>
+            <toclevels>2</toclevels>
+            <numbered></numbered>
+          </attributes>
+        </configuration>
+        <executions>
+          <execution>
+            <id>output-html</id>
+            <phase>test</phase>
+            <goals>
+              <goal>process-asciidoc</goal>
+            </goals>
+            <configuration>
+              <backend>html5</backend>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
