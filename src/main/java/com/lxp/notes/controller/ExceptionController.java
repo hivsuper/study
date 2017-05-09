@@ -23,12 +23,13 @@ import io.swagger.annotations.ApiParam;
 @Controller
 @RequestMapping(value = "/二")
 public class ExceptionController {
+    static final String 捕获_RUNTIME_EXCEPTION = "捕获RuntimeException";
     @Resource
     private ExceptionService exceptionService;
 
     @ResponseBody
     @RequestMapping(value = "1+2-no", method = POST)
-    @ApiOperation(value = "捕获RuntimeException")
+    @ApiOperation(value = 捕获_RUNTIME_EXCEPTION)
     public String _二_1_no(@ApiParam(value = "eg. [\"A\",\"B\"]", required = true) @RequestBody List<String> list,
             @RequestParam int index) {
         return exceptionService._二_1_no(list, index);
