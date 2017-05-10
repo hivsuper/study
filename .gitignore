@@ -1,0 +1,5 @@
+study-jsoup/logs/
+study-parent/.settings/
+study-parent/bin/
+*.project
+*.versionsBackup
