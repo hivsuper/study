@@ -2,11 +2,17 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.lxp</groupId>
-  <artifactId>companies</artifactId>
+  <artifactId>study-jsoup</artifactId>
   <packaging>war</packaging>
   <version>develop-SNAPSHOT</version>
-  <name>companies Maven Webapp</name>
-  <url>http://mvnrepository.com/</url>
+  <name>study-jsoup Maven Webapp</name>
+  <repositories>
+    <repository>
+      <id>mvnrepository</id>
+      <name>mvnrepository for Maven</name>
+      <url>http://mvnrepository.com/</url>
+    </repository>
+  </repositories>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -85,8 +91,17 @@
     </dependency>
   </dependencies>
   <build>
-    <finalName>companies</finalName>
+    <finalName>study-jsoup</finalName>
     <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.5.1</version>
+        <configuration>
+          <source>1.7</source>
+          <target>1.7</target>
+        </configuration>
+      </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-war-plugin</artifactId>
@@ -110,7 +125,7 @@
         <artifactId>tomcat7-maven-plugin</artifactId>
         <version>2.1</version>
         <configuration>
-          <path>/companies</path>
+          <path>/study-jsoup</path>
         </configuration>
       </plugin>
     </plugins>
