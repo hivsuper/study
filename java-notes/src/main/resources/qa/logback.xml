@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <File>${catalina.base}/logs/notes.log</File>
+    <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+      <fileNamePattern>${catalina.base}/logs/notes.%i.log.zip</fileNamePattern><!-- 可以指定文件压缩选项，gz 或者 zip -->
+      <minIndex>1</minIndex>
+      <maxIndex>3</maxIndex><!-- 窗口大小是1到3，当保存了3个归档文件后，将覆盖最早的日志 -->
+    </rollingPolicy>
+    <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+      <maxFileSize>1KB</maxFileSize>
+    </triggeringPolicy>
+    <encoder>
+      <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+      <charset>UTF-8</charset>
+      <immediateFlush>true</immediateFlush>
+    </encoder>
+  </appender>
+  <logger name="com.lxp.notes.service" additivity="false">
+    <level value="INFO" />
+    <appender-ref ref="FILE" />
+  </logger>
+  <root level="INFO">
+    <appender-ref ref="FILE" />
+  </root>
+</configuration>
