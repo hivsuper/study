@@ -3,3 +3,6 @@ study-parent/.settings/
 study-parent/bin/
 *.project
 *.versionsBackup
+*.classpath
+java-notes/target/
+java-notes/.settings/
