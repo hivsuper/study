@@ -1,5 +1,4 @@
 # study
-===========================
 All experimental projects  
 #### study-jsoup
 Set timer jobs to capture useful content with Jsoup.  
@@ -12,4 +11,3 @@ jersey2+mybatis
 参考：http://aub.iteye.com/blog/1103685  
 2. 异常的一些处理方法  
 3. Swagger2Markup生成静态API文档  
-===========================
