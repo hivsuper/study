@@ -7,7 +7,10 @@
         http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
 		http://www.springframework.org/schema/context 
         http://www.springframework.org/schema/context/spring-context-4.0.xsd">
-  <!-- spring自动组件扫描，载入注解的内容 -->
-  <context:annotation-config /><!--这个非常重要，没有的时候controller不能注册 -->
-  <context:component-scan base-package="com.lxp.activemq.service" />
+  <bean id="consumerMessageListener" class="com.lxp.activemq.comsumer.listener.ConsumerMessageListener" />
+  <bean id="jmsContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+    <property name="connectionFactory" ref="connectionFactory" />
+    <property name="destination" ref="queueDestination" />
+    <property name="messageListener" ref="consumerMessageListener" />
+  </bean>
 </beans>

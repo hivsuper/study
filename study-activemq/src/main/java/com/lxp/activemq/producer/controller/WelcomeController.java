@@ -1,4 +1,4 @@
-package com.lxp.activemq.controller;
+package com.lxp.activemq.producer.controller;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 

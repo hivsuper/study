@@ -1,4 +1,4 @@
-package com.lxp.activemq.controller;
+package com.lxp.activemq.producer.controller;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;

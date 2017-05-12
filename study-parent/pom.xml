@@ -316,6 +316,28 @@
         <version>2.2.3</version>
       </dependency>
       <!-- study-jsoup module end -->
+      <!-- study-activemq module start -->
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-jms</artifactId>
+        <version>${spring-version}</version>
+      </dependency>
+      <dependency>
+        <groupId>javax.annotation</groupId>
+        <artifactId>jsr250-api</artifactId>
+        <version>1.0</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.activemq</groupId>
+        <artifactId>activemq-core</artifactId>
+        <version>5.7.0</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.activemq</groupId>
+        <artifactId>activemq-pool</artifactId>
+        <version>5.14.5</version>
+      </dependency>
+      <!-- study-activemq module end -->
     </dependencies>
   </dependencyManagement>
   <build>
