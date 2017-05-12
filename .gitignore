@@ -6,3 +6,5 @@ study-parent/bin/
 *.classpath
 java-notes/target/
 java-notes/.settings/
+.settings/
+target/
