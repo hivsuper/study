@@ -47,6 +47,7 @@
     <property name="connectionFactory" ref="connectionFactory" />
     <property name="destination" ref="objectQueueDestination" />
     <property name="messageListener" ref="objectResponseTopicListenerAdapter" />
+    <property name="sessionTransacted" value="true"/>  
   </bean>
   <!-- 消费者end -->
 </beans>
