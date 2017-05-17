@@ -30,4 +30,11 @@ public class ProducerControllerTest extends BaseTest {
         mockMvc.perform(post("/producer/sendAString").param("content", content)).andExpect(status().isOk())
                 .andDo(print()).andReturn().getResponse().getContentAsString();
     }
+
+    @Test
+    public void testSendAObject() throws Exception {
+        final String content = "#$%^*&()*&^%啦啦后遗症69t";
+        mockMvc.perform(post("/producer/sendAObject").param("sender", "呵呵呵").param("receiver", "啦啦啦啦").param("content",
+                content)).andExpect(status().isOk()).andDo(print()).andReturn().getResponse().getContentAsString();
+    }
 }

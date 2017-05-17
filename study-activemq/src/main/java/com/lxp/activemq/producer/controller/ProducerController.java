@@ -23,6 +23,12 @@ public class ProducerController {
     @ResponseBody
     @RequestMapping(value = "/sendAString", method = POST)
     public void sendAString(@RequestParam String content) {
-        messageService.send(queueDestination, content);
+        messageService.sendTextMessage(queueDestination, content);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/sendAObject", method = POST)
+    public void sendAObject(@RequestParam String sender, @RequestParam String receiver, @RequestParam String content) {
+        messageService.sendObjectMessage(queueDestination, sender, receiver, content);
     }
 }

@@ -25,12 +25,28 @@
     <property name="targetConnectionFactory" ref="pooledConnectionFactory" />
   </bean>
 
+
+  <!-- 生产者start -->
   <bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
     <property name="connectionFactory" ref="connectionFactory" />
   </bean>
-
-  <!-- 这个是队列目的地 -->
-  <bean id="queueDestination" class="org.apache.activemq.command.ActiveMQQueue">
-    <constructor-arg value="queue" />
+  <bean id="objectQueueDestination" class="org.apache.activemq.command.ActiveMQQueue">
+    <constructor-arg value="objectQueue" />
   </bean>
+  <!-- 生产者end -->
+
+
+  <!-- 消费者start -->
+  <bean id="consumerMessageListener" class="com.lxp.activemq.comsumer.listener.ConsumerMessageListener" />
+  
+  <bean id="objectResponseTopicListenerAdapter" class="org.springframework.jms.listener.adapter.MessageListenerAdapter">
+    <property name="delegate" ref="consumerMessageListener" />
+    <property name="defaultListenerMethod" value="onMessage" />
+  </bean>
+  <bean id="jmsObjectContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+    <property name="connectionFactory" ref="connectionFactory" />
+    <property name="destination" ref="objectQueueDestination" />
+    <property name="messageListener" ref="objectResponseTopicListenerAdapter" />
+  </bean>
+  <!-- 消费者end -->
 </beans>
