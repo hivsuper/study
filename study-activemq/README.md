@@ -78,4 +78,20 @@
 	</broker>
     
 ```
-	 
++	How to create a high availability cluster?  
+	Reference: http://activemq.apache.org/clustering.html  
+	1. Queue consumer clusters  
+	2. Broker clusters  
+	3. Discovery of brokers  
+	4. Networks of brokers  
+	5. Master Slave  
+	6. Replicated Message Stores  
++	Master/Slave approach?  
+	Reference: http://activemq.apache.org/masterslave.html  
+	1. Shared File System Master Slave  
+	2. JDBC Master Slave  
+	3. Replicated LevelDB Store  
++	How to preserve order of messages?  
+	Reference: http://activemq.apache.org/how-do-i-preserve-order-of-messages.html  
+	1. Exclusive Consumer  
+	2. Message Groups  
