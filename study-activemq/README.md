@@ -80,18 +80,24 @@
 ```
 +	How to create a high availability cluster?  
 	Reference: http://activemq.apache.org/clustering.html  
-	1. Queue consumer clusters  
-	2. Broker clusters  
-	3. Discovery of brokers  
-	4. Networks of brokers  
-	5. Master Slave  
-	6. Replicated Message Stores  
+	<table>
+		<tr><td>1</td><td>Queue consumer clusters</td></tr>
+		<tr><td>2</td><td>Broker clusters</td></tr>
+		<tr><td>3</td><td>Discovery of brokers</td></tr>
+		<tr><td>4</td><td>Networks of brokers</td></tr>
+		<tr><td>5</td><td>Master Slave</td></tr>
+		<tr><td>6</td><td>Replicated Message Stores</td></tr>
+	</table>
 +	Master/Slave approach?  
 	Reference: http://activemq.apache.org/masterslave.html  
-	1. Shared File System Master Slave  
-	2. JDBC Master Slave  
-	3. Replicated LevelDB Store  
+	<table>
+		<tr><td>1</td><td>Shared File System Master Slave</td></tr>
+		<tr><td>2</td><td>JDBC Master Slave</td></tr>
+		<tr><td>3</td><td>Replicated LevelDB Store</td></tr>
+	</table>
 +	How to preserve order of messages?  
-	Reference: http://activemq.apache.org/how-do-i-preserve-order-of-messages.html  
-	1. Exclusive Consumer  
-	2. Message Groups  
+	Reference: http://activemq.apache.org/how-do-i-preserve-order-of-messages.html
+	<table>
+		<tr><td>1</td><td>Exclusive Consumer</td></tr>
+		<tr><td>2</td><td>Message Groups</td></tr>
+	</table>  
