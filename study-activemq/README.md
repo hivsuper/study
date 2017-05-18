@@ -1,11 +1,11 @@
 # study-activemq
-+	How to integrate activemq with spring?
++	How to integrate ActiveMQ with spring?
 	Refer to: http://elim.iteye.com/blog/1893038  
 	http://elim.iteye.com/blog/1900937
-+	How to install active in Ubuntu 15.10?  
++	How to install ActiveMQ in Ubuntu 15.10?  
 	1. Download software from http://activemq.apache.org/download.html.  
 	2. Extract the files to /data/activemq.
-+	How to add configure Authentication for activemq?  
++	How to add configure Authentication for ActiveMQ?  
 	1. ``vi /data/activemq/conf/activemq.xml``  
 	2. Insert simpleAuthenticationPlugin and corresponding content and quit.  
 	see http://activemq.apache.org/complex-single-broker-configuration-stomp-only.html  
