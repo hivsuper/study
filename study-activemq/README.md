@@ -7,7 +7,7 @@
 	2. Extract the files to /data/activemq.
 +	How to add configure Authentication for ActiveMQ?  
 	1. ``vi /data/activemq/conf/activemq.xml``  
-	2. Insert simpleAuthenticationPlugin and corresponding content and quit.  
+	2. Insert `simpleAuthenticationPlugin` and corresponding content and quit.  
 	see http://activemq.apache.org/complex-single-broker-configuration-stomp-only.html  
 	https://www.sleuthkit.org/autopsy/docs/user-docs/4.0/install_activemq.html    
 	3. Done.
