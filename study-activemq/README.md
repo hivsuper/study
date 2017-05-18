@@ -1,5 +1,5 @@
 # study-activemq
-+	How to integrate ActiveMQ with spring?
++	How to integrate ActiveMQ with spring?  
 	Refer to: http://elim.iteye.com/blog/1893038  
 	http://elim.iteye.com/blog/1900937
 +	How to install ActiveMQ in Ubuntu 15.10?  
