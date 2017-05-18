@@ -10,7 +10,7 @@ http://elim.iteye.com/blog/1900937
 	see http://activemq.apache.org/complex-single-broker-configuration-stomp-only.html  
 	https://www.sleuthkit.org/autopsy/docs/user-docs/4.0/install_activemq.html    
 	3. Done.
-    <pre>
+ ```
 
 	<broker xmlns="http://activemq.apache.org/schema/core" brokerName="localhost"dataDirectory="${activemq.data}">
 		<destinationPolicy>
@@ -76,5 +76,5 @@ http://elim.iteye.com/blog/1900937
 		</plugins>
 	</broker>
     
-</pre>
+```
 	 
