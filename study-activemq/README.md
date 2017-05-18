@@ -1,6 +1,7 @@
 # study-activemq
-Refer to: http://elim.iteye.com/blog/1893038  
-http://elim.iteye.com/blog/1900937
++	How to integrate activemq with spring?
+	Refer to: http://elim.iteye.com/blog/1893038  
+	http://elim.iteye.com/blog/1900937
 +	How to install active in Ubuntu 15.10?  
 	1. Download software from http://activemq.apache.org/download.html.  
 	2. Extract the files to /data/activemq.
