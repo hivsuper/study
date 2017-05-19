@@ -19,60 +19,10 @@ JAVA: 1.7.0_101
 	see http://activemq.apache.org/complex-single-broker-configuration-stomp-only.html  
 	https://www.sleuthkit.org/autopsy/docs/user-docs/4.0/install_activemq.html    
 	3. The broker block show be like:
- ```
+ ```scheme
 
 	<broker xmlns="http://activemq.apache.org/schema/core" brokerName="localhost"dataDirectory="${activemq.data}">
-		<destinationPolicy>
-			...
-		</destinationPolicy>
-	
-	
-		<!--
-			The managementContext is used to configure how ActiveMQ is exposed in
-			JMX. By default, ActiveMQ uses the MBean server that is started by
-			the JVM. For more information, see:
-	
-			http://activemq.apache.org/jmx.html
-		-->
-		<managementContext>
-			<managementContext createConnector="false"/>
-		</managementContext>
-	
-		<!--
-			Configure message persistence for the broker. The default persistence
-			mechanism is the KahaDB store (identified by the kahaDB tag).
-			For more information, see:
-	
-			http://activemq.apache.org/persistence.html
-		-->
-		<persistenceAdapter>
-			<kahaDB directory="${activemq.data}/kahadb"/>
-		</persistenceAdapter>
-	
-	
-		  <!--
-			The systemUsage controls the maximum amount of space the broker will
-			use before disabling caching and/or slowing down producers. For more information, see:
-			http://activemq.apache.org/producer-flow-control.html
-		  -->
-		  <systemUsage>
-			...
-		</systemUsage>
-	
-		<!--
-			The transport connectors expose ActiveMQ over a given protocol to
-			clients and other brokers. For more information, see:
-	
-			http://activemq.apache.org/configuring-transports.html
-		-->
-		<transportConnectors>
-			...
-		</transportConnectors>
-	
-		<!-- destroy the spring context on shutdown to stop jetty -->
-		<shutdownHooks>
-			<bean xmlns="http://www.springframework.org/schema/beans" class="org.apache.activemq.hooks.SpringContextHook" />
-		</shutdownHooks>
+		....
 	
 		<!-- 2017-5-17 19:51 -->
 		<plugins>
@@ -119,94 +69,24 @@ JAVA: 1.7.0_101
 		-	Insert dataSource(mysql-ds) configuration after broker  
 		-	Modify persistenceAdapter(PS: `createTablesOnStartup` should be `false` once activemq instance has been started successfully because the corresponding tables will be initialized in database when createTablesOnStartup=true.)  
 		Check the `mysql-ds` and `persistenceAdapter` configuration out:  
-```
+```scheme
 
 	<beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd  http://activemq.apache.org/schema/core http://activemq.apache.org/schema/core/activemq-core.xsd">
 
-	    <!-- Allows us to use system properties as variables in this configuration file -->
-	    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-	        ...
-	    </bean>
-	
-	   <!-- Allows accessing the server log -->
-	    <bean id="logQuery" class="io.fabric8.insight.log.log4j.Log4jLogQuery"
-	          lazy-init="false" scope="singleton"
-	          init-method="start" destroy-method="stop">
-	    </bean>
-	
-	    <!--
-	        The <broker> element is used to configure the ActiveMQ broker.
-	    -->
+	    ...
+	    
 	    <broker xmlns="http://activemq.apache.org/schema/core" brokerName="localhost" dataDirectory="${activemq.data}">
 	
-	        <destinationPolicy>
-	            ...
-	        </destinationPolicy>
-	
-	
-	        <!--
-	            The managementContext is used to configure how ActiveMQ is exposed in
-	            JMX. By default, ActiveMQ uses the MBean server that is started by
-	            the JVM. For more information, see:
-	
-	            http://activemq.apache.org/jmx.html
-	        -->
-	        <managementContext>
-	            <managementContext createConnector="false"/>
-	        </managementContext>
-	
-	        <!--
-	            Configure message persistence for the broker. The default persistence
-	            mechanism is the KahaDB store (identified by the kahaDB tag).
-	            For more information, see:
-	
-	            http://activemq.apache.org/persistence.html
-	        -->
+	        ...
+	        
 	        <persistenceAdapter>
 	            <!--<kahaDB directory="${activemq.data}/kahadb"/>-->
 	            <jdbcPersistenceAdapter dataDirectory="${activemq.data}" dataSource="#mysql-ds" createTablesOnStartup="false"/>
 	        </persistenceAdapter>
 	
-	
-	          <!--
-	            The systemUsage controls the maximum amount of space the broker will
-	            use before disabling caching and/or slowing down producers. For more information, see:
-	            http://activemq.apache.org/producer-flow-control.html
-	          -->
-	          <systemUsage>
-	            <systemUsage>
-	                <memoryUsage>
-	                    <memoryUsage percentOfJvmHeap="70" />
-	                </memoryUsage>
-	                <storeUsage>
-	                    <storeUsage limit="100 gb"/>
-	                </storeUsage>
-	                <tempUsage>
-	                    <tempUsage limit="50 gb"/>
-	                </tempUsage>
-	            </systemUsage>
-	        </systemUsage>
-	
-	        <!--
-	            The transport connectors expose ActiveMQ over a given protocol to
-	            clients and other brokers. For more information, see:
-	
-	            http://activemq.apache.org/configuring-transports.html
-	        -->
-	        <transportConnectors>
-	            ...
-	        </transportConnectors>
-	
-	        <!-- destroy the spring context on shutdown to stop jetty -->
-	        <shutdownHooks>
-	            <bean xmlns="http://www.springframework.org/schema/beans" class="org.apache.activemq.hooks.SpringContextHook" />
-	        </shutdownHooks>
-	
-	        <plugins>
-	            ...
-	        </plugins>
+	        ...
 	
 	    </broker>
 	    <!-- 2017-5-19 11:16-->
@@ -219,13 +99,7 @@ JAVA: 1.7.0_101
 	        <property name="poolPreparedStatements" value="true"/>
 	    </bean>
 	
-	    <!--
-	        Enable web consoles, REST and Ajax APIs and demos
-	        The web consoles requires by default login, you can disable this in the jetty.xml file
-	
-	        Take a look at ${ACTIVEMQ_HOME}/conf/jetty.xml for more details
-	    -->
-	    <import resource="jetty.xml"/>
+	    ...
 	
 	</beans>
 
