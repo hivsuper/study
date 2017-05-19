@@ -64,6 +64,8 @@ JAVA: 1.7.0_101
 	http://stackoverflow.com/questions/34294621/activemq-failed-to-load-class-path-resource-activemq-xml/34294717  
 	http://aorsoft.blog.51cto.com/2505763/498669  
 	1. Install mysql and ensure it can be connected remotely.  
+		- `CREATE DATABASE amq;`  
+		- `GRANT ALL PRIVILEGES ON amq.* TO amq@'%' IDENTIFIED BY 'amq';`
 	2. Upload mysql-connector-java-5.1.26.jar into /data/activemq/lib/  
 	3. `vi /data/activemq/conf/activemq.xml`  
 		-	Insert dataSource(mysql-ds) configuration after broker  
