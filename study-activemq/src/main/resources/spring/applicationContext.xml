@@ -11,7 +11,7 @@
 
   <!-- activeMQ消息中间件 -->
   <bean id="targetConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
-    <property name="brokerURL" value="tcp://192.168.68.23:61616" />
+    <property name="brokerURL" value="failover:(tcp://192.168.68.23:61616,tcp://192.168.68.24:61616)" />
     <property name="userName" value="frontend" />
     <property name="password" value="test" />
   </bean>
