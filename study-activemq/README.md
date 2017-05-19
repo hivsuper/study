@@ -11,6 +11,8 @@ JAVA: 1.7.0_101
 +	How to install ActiveMQ?  
 	1. Download software from http://activemq.apache.org/download.html.  
 	2. Extract the files to /data/activemq.
++	How to start ActiveMQ up?  
+	Entry /data/activemq/bin and run command `./activemq console` or `./activemq`
 +	How to configure Authentication for ActiveMQ?  
 	1. ``vi /data/activemq/conf/activemq.xml``  
 	2. Insert `simpleAuthenticationPlugin` and corresponding content.  
@@ -112,9 +114,10 @@ JAVA: 1.7.0_101
 	http://stackoverflow.com/questions/34294621/activemq-failed-to-load-class-path-resource-activemq-xml/34294717  
 	http://aorsoft.blog.51cto.com/2505763/498669  
 	1. Install mysql and ensure it can be connected remotely.  
-	2. `vi /data/activemq/conf/activemq.xml`  
-	-	Insert dataSource(mysql-ds) configuration after broker  
-	-	Modify persistenceAdapter(PS: `createTablesOnStartup` should be `false` once activemq instance has been started successfully because the corresponding tables will be initialized in database when createTablesOnStartup=true.)  
+	2. Upload mysql-connector-java-5.1.26.jar into /data/activemq/lib/  
+	3. `vi /data/activemq/conf/activemq.xml`  
+		-	Insert dataSource(mysql-ds) configuration after broker  
+		-	Modify persistenceAdapter(PS: `createTablesOnStartup` should be `false` once activemq instance has been started successfully because the corresponding tables will be initialized in database when createTablesOnStartup=true.)  
 ```
 
 	<beans xmlns="http://www.springframework.org/schema/beans"
@@ -225,6 +228,4 @@ JAVA: 1.7.0_101
 	
 	</beans>
 
-```	
-	3. Upload mysql-connector-java-5.1.26.jar into /data/activemq/lib/  
-	
+```		
