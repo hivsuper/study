@@ -5,7 +5,7 @@
 +	How to install ActiveMQ in Ubuntu 15.10?  
 	1. Download software from http://activemq.apache.org/download.html.  
 	2. Extract the files to /data/activemq.
-+	How to add configure Authentication for ActiveMQ?  
++	How to configure Authentication for ActiveMQ?  
 	1. ``vi /data/activemq/conf/activemq.xml``  
 	2. Insert `simpleAuthenticationPlugin` and corresponding content.  
 	see http://activemq.apache.org/complex-single-broker-configuration-stomp-only.html  
