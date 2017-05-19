@@ -63,8 +63,8 @@ JAVA: 1.7.0_101
 	Reference: https://my.oschina.net/xiaoxishan/blog/382502  
 	http://stackoverflow.com/questions/34294621/activemq-failed-to-load-class-path-resource-activemq-xml/34294717  
 	http://aorsoft.blog.51cto.com/2505763/498669  
-	Assume there are two servers 192.168.68.23 and 192.168.68.24. Configure them respectively as per steps below:  
-	1. Install mysql and ensure it can be connected remotely.  
+	Assume there are two servers `192.168.68.23` and `192.168.68.24`. Configure them respectively as per steps below:  
+	1. Install mysql on `192.168.68.24` and ensure it can be connected remotely.  
 		- `CREATE DATABASE amq;`  
 		- `GRANT ALL PRIVILEGES ON amq.* TO amq@'%' IDENTIFIED BY 'amq';`
 	2. Upload mysql-connector-java-5.1.26.jar into /data/activemq/lib/  
