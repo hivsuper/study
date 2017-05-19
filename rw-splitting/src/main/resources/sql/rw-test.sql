@@ -1,0 +1,10 @@
+CREATE DATABASE `rw-test`;
+CREATE TABLE `t_user` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`name` VARCHAR(50) NOT NULL,
+	`create_time` DATETIME NOT NULL,
+	`modify_time` DATETIME NULL DEFAULT NULL,
+	PRIMARY KEY (`id`)
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB;

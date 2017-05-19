@@ -338,6 +338,14 @@
         <version>5.14.5</version>
       </dependency>
       <!-- study-activemq module end -->
+
+      <!-- rw-splitting module start -->
+      <dependency>
+        <groupId>org.aspectj</groupId>
+        <artifactId>aspectjweaver</artifactId>
+        <version>1.8.10</version>
+      </dependency>
+      <!-- rw-splitting module end -->
     </dependencies>
   </dependencyManagement>
   <build>
