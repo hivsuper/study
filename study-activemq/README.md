@@ -1,8 +1,13 @@
 # study-activemq
+### Environment 
+ActiveMQ: apache-activemq-5.14.5  
+OS: Ubuntu 15.10  
+Mysql: 5.6.31-0ubuntu0.15.10.1
+### Q&A  
 +	How to integrate ActiveMQ with spring?  
 	Refer to: http://elim.iteye.com/blog/1893038  
 	http://elim.iteye.com/blog/1900937
-+	How to install ActiveMQ in Ubuntu 15.10?  
++	How to install ActiveMQ?  
 	1. Download software from http://activemq.apache.org/download.html.  
 	2. Extract the files to /data/activemq.
 +	How to configure Authentication for ActiveMQ?  
