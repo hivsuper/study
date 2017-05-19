@@ -118,7 +118,7 @@ JAVA: 1.7.0_101
 	3. `vi /data/activemq/conf/activemq.xml`  
 		-	Insert dataSource(mysql-ds) configuration after broker  
 		-	Modify persistenceAdapter(PS: `createTablesOnStartup` should be `false` once activemq instance has been started successfully because the corresponding tables will be initialized in database when createTablesOnStartup=true.)  
-		Check the mysql-ds configuration out below:  
+		Check the `mysql-ds` configuration out below:  
 ```
 
 	<beans xmlns="http://www.springframework.org/schema/beans"
