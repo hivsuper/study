@@ -4,7 +4,7 @@
 
   <groupId>org.lxp.study</groupId>
   <artifactId>study-parent</artifactId>
-  <version>rw-splitting-SNAPSHOT</version>
+  <version>develop-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <name>study-parent</name>
