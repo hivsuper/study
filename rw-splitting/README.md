@@ -8,5 +8,5 @@ MySQL: 5.6.31-0ubuntu0.15.10.1
 JAVA: 1.7.0_79  
 
 ## Q&A  
-+	How to set up MySQL master/salve replication?
++	How to set up MySQL master/salve replication?  
 	Reference: http://www.cnblogs.com/hiver/p/6879720.html  
