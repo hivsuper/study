@@ -1,10 +1,10 @@
 # study-activemq
-### Environment 
+## Environment 
 ActiveMQ: apache-activemq-5.14.5  
 OS: Ubuntu 15.10  
 MySQL: 5.6.31-0ubuntu0.15.10.1  
 JAVA: 1.7.0_101  
-### Q&A  
+## Q&A  
 +	How to integrate ActiveMQ with spring?  
 	Refer to: http://elim.iteye.com/blog/1893038  
 	http://elim.iteye.com/blog/1900937
