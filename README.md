@@ -17,3 +17,6 @@ All experimental projects
 
 *study-activemq*
 + 学习activemq  
+
+*rw-splitting*
++ test read/write splitting approach  
