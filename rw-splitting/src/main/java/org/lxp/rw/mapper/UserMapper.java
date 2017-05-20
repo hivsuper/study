@@ -9,4 +9,6 @@ public interface UserMapper {
     User selectById(@Param("id") int id);
 
     int deleteById(@Param("id") int id);
+
+    int updateById(User user);
 }

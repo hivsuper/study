@@ -229,7 +229,7 @@
       <dependency>
         <groupId>mysql</groupId>
         <artifactId>mysql-connector-java</artifactId>
-        <version>5.1.26</version>
+        <version>5.1.42</version>
       </dependency>
       <dependency>
         <groupId>org.mybatis</groupId>
@@ -374,5 +374,7 @@
     <module>../jersey2demo</module>
     <module>../study-slb</module>
     <module>../study-jsoup</module>
+    <module>../rw-splitting</module>
+    <module>../study-activemq</module>
   </modules>
 </project>

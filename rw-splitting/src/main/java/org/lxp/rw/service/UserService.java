@@ -25,12 +25,21 @@ public class UserService {
         return user;
     }
 
-    public User queryUserById(int userId) {
+    public User queryByUserId(int userId) {
         return userMapper.selectById(userId);
     }
 
-    public boolean deleteUserById(int userId) {
+    public boolean deleteByUserId(int userId) {
         LOG.info("delete userId={}", userId);
         return userMapper.deleteById(userId) > 0;
+    }
+
+    public User updateNameByUserId(int userId, String name) {
+        User user = queryByUserId(userId);
+        user.setName(name);
+        user.setModifyTime(Calendar.getInstance().getTime());
+        userMapper.updateById(user);
+        LOG.info("update userId={}'s name to {}", userId, name);
+        return queryByUserId(userId);
     }
 }

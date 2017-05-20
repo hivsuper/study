@@ -20,4 +20,7 @@
   <delete id="deleteById" parameterType="int" statementType="PREPARED">
     DELETE FROM `t_user` WHERE `id`=#{id};
   </delete>
+  <update id="updateById" parameterType="org.lxp.rw.model.User" statementType="PREPARED">
+    UPDATE `t_user` SET `name`=#{name}, `create_time`=#{createTime}, `modify_time`=#{modifyTime} WHERE `id`=#{id};
+  </update>
 </mapper>

@@ -45,4 +45,8 @@ public class User {
         this.modifyTime = modifyTime;
     }
 
+    @Override
+    public String toString() {
+        return String.format("User [id=%s, name=%s, createTime=%s, modifyTime=%s]", id, name, createTime, modifyTime);
+    }
 }
