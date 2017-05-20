@@ -1,4 +1,5 @@
 # study-activemq
+Study ActiveMQ and test.  
 ## Environment 
 ActiveMQ: apache-activemq-5.14.5  
 OS: Ubuntu 15.10  
