@@ -20,3 +20,6 @@ All experimental projects
 
 *rw-splitting*
 + test read/write splitting approach  
+
+*study-redis*
++ test publish/subscribe base on redis
