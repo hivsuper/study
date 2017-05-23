@@ -346,6 +346,14 @@
         <version>1.8.10</version>
       </dependency>
       <!-- rw-splitting module end -->
+
+      <!-- study-redis module start -->
+      <dependency>
+        <groupId>redis.clients</groupId>
+        <artifactId>jedis</artifactId>
+        <version>2.9.0</version>
+      </dependency>
+      <!-- study-redis module end -->
     </dependencies>
   </dependencyManagement>
   <build>
@@ -376,5 +384,6 @@
     <module>../study-jsoup</module>
     <module>../rw-splitting</module>
     <module>../study-activemq</module>
+    <module>../study-redis</module>
   </modules>
 </project>
