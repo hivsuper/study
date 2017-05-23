@@ -5,7 +5,7 @@
   <parent>
     <groupId>org.lxp.study</groupId>
     <artifactId>study-parent</artifactId>
-    <version>redis-SNAPSHOT</version>
+    <version>develop-SNAPSHOT</version>
     <relativePath>../study-parent/pom.xml</relativePath>
   </parent>
   <artifactId>jersey2demo</artifactId>
