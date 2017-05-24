@@ -32,12 +32,10 @@ public class RedisMsgPubSubListenerTest {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                JedisHelper.subscribe(pubsub, NEWS_SHARE_CHANNEL);
+                JedisHelper.publishMsg(NEWS_SHARE_CHANNEL, "stop");
                 countDownLatch.countDown();
             }
-        }, "sub").start();
+        }, "unsubscribe").start();
         countDownLatch.await();
-        // subscribe always keep the thread blocked. still don't know why
-        JedisHelper.unsubscribe(pubsub, NEWS_SHARE_CHANNEL);
     }
 }
