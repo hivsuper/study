@@ -4,7 +4,7 @@
   <parent>
     <groupId>org.lxp.study</groupId>
     <artifactId>study-parent</artifactId>
-    <version>1.3.0-RELEASE</version>
+    <version>1.4.0-RELEASE</version>
     <relativePath>../study-parent/pom.xml</relativePath>
   </parent>
   <artifactId>study-activemq</artifactId>
