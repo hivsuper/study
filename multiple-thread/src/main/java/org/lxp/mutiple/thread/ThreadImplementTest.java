@@ -4,13 +4,17 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
+ * 测试时去掉@Ignore
+ * 
  * @Description: 线程的两种实现方法
  * @author Super.Li
  * @date Jul 4, 2017
  */
+@Ignore
 public class ThreadImplementTest {
     private Map<Integer, Long> map = new ConcurrentHashMap<>();
 
