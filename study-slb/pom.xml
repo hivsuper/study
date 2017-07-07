@@ -5,7 +5,7 @@
   <parent>
     <groupId>org.lxp.study</groupId>
     <artifactId>study-parent</artifactId>
-    <version>develop-SNAPSHOT</version>
+    <version>multiple-thread-SNAPSHOT</version>
     <relativePath>../study-parent/pom.xml</relativePath>
   </parent>
   <artifactId>study-slb</artifactId>
