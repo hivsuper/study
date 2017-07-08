@@ -3,17 +3,13 @@ package org.lxp.mutiple.thread;
 import java.util.concurrent.CountDownLatch;
 
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 
 /**
- * 测试时去掉@Ignore
- * 
  * @Description: 规定线程次序的方法
  * @author Super.Li
  * @date Jul 5, 2017
  */
-@Ignore
 public class ThreadOrderTest {
     private long millisUnit = 1000;
     private int count = 2;

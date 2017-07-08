@@ -5,17 +5,14 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 
 /**
- * 测试时去掉@Ignore
  * 
  * @Description: 测试Thread的方法
  * @author Super.Li
  * @date Jul 4, 2017
  */
-@Ignore
 public class ThreadMethodsTest {
     static String SLEEP = "sleep";
     static String YIELD = "yield";

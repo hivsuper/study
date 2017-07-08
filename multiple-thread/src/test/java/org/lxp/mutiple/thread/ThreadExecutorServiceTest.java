@@ -9,17 +9,13 @@ import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 
 /**
- * 测试时去掉@Ignore
- * 
  * @Description: 测试ExecutorService
  * @author Super.Li
  * @date Jul 6, 2017
  */
-@Ignore
 public class ThreadExecutorServiceTest {
     private static final String THIS_IS_SHUTDOWN_WITH_AWAIT_TERMINATION = "This is shutdownWithAwaitTermination";
     private static final int RESULT = 111;
