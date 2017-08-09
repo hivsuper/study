@@ -42,12 +42,12 @@ public class ThreadOrderTest {
         }
 
         /**
-         * ContdownLatch可同时阻塞多个线程，但它们可并发执行
+         * CountdownLatch可同时阻塞多个线程，但它们可并发执行
          * 
          * @return
          * @throws InterruptedException
          */
-        public long preserveOrderViaContdownLatch() throws InterruptedException {
+        public long preserveOrderViaCountdownLatch() throws InterruptedException {
             long startMillis = System.currentTimeMillis();
             final CountDownLatch countDownLatch = new CountDownLatch(count);
             for (int i = 0; i < count; i++) {
@@ -75,8 +75,8 @@ public class ThreadOrderTest {
     }
 
     @Test
-    public void testPreserveOrderViaContdownLatch() throws InterruptedException {
+    public void testPreserveOrderViaCountdownLatch() throws InterruptedException {
         ThreadOrder threadOrder = new ThreadOrder();
-        Assert.assertEquals(1, threadOrder.preserveOrderViaContdownLatch() / millisUnit);
+        Assert.assertEquals(1, threadOrder.preserveOrderViaCountdownLatch() / millisUnit);
     }
 }
