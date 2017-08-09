@@ -13,7 +13,7 @@ JAVA: 1.7.0_101
 	1. Download software from http://activemq.apache.org/download.html.  
 	2. Extract the files to /data/activemq.
 +	How to start ActiveMQ up?  
-	Entry /data/activemq/bin and run command `./activemq console` or `./activemq`
+	Enter /data/activemq/bin and run command `./activemq console` or `./activemq`
 +	How to configure Authentication for ActiveMQ?  
 	1. ``vi /data/activemq/conf/activemq.xml``  
 	2. Insert `simpleAuthenticationPlugin` and corresponding content.  
