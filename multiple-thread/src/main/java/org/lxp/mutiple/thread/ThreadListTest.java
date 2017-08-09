@@ -54,8 +54,8 @@ public class ThreadListTest {
         ThreadListTest test = new ThreadListTest();
         List<Integer> list;
         list = new Vector<>();// Vector只保证内部方法线程安全
-        list = new ArrayList<>();// ArrayList效率较Vector，但非线程安全
-        list = Collections.synchronizedList(new ArrayList<>());// Collections.synchronizedList与Vector有异曲同工之妙
+        list = new ArrayList<>();// ArrayList效率比Vector高，但非线程安全
+        list = Collections.synchronizedList(new ArrayList<>());// Collections.synchronizedList与Vector异曲同工
         list = new CopyOnWriteArrayList<>();// CopyOnWriteArrayList线程安全：每个线程先复制一份并把地址指向新list，在新的list上操作，因此最终结果未必符合预期
 
         test.multipleThreadArrayList(list);
