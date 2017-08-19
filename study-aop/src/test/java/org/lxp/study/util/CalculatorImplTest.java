@@ -13,7 +13,7 @@ public class CalculatorImplTest {
 
     @Test
     public void testAdd() throws Exception {
-        CalculatorImpl calcImpl = new CalculatorImpl();
+        Calculator calculator = new CalculatorImpl();
         AbstractHandler before = new AbstractHandler() {
             @Override
             public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
@@ -46,7 +46,7 @@ public class CalculatorImplTest {
         handlers.add(before);
         handlers.add(after);
         handlers.add(around);
-        Calculator proxy = (Calculator) ProxyFactory.getProxy(calcImpl, handlers);
+        Calculator proxy = (Calculator) ProxyFactory.getProxy(calculator, handlers);
         Assert.assertEquals(30, proxy.add(20, 10));
     }
 

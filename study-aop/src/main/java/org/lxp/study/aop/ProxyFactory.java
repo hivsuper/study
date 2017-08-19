@@ -8,10 +8,10 @@ public class ProxyFactory {
         Object proxyObject = null;
         if (handlers.size() > 0) {
             proxyObject = targetObject;
-            for (int i = 0; i < handlers.size(); i++) {
-                handlers.get(i).setTargetObject(proxyObject);
+            for (AbstractHandler abstractHandler : handlers) {
+                abstractHandler.setTargetObject(proxyObject);
                 proxyObject = Proxy.newProxyInstance(targetObject.getClass().getClassLoader(),
-                        targetObject.getClass().getInterfaces(), handlers.get(i));
+                        targetObject.getClass().getInterfaces(), abstractHandler);
             }
             return proxyObject;
         } else {
