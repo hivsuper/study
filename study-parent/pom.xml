@@ -4,7 +4,7 @@
 
   <groupId>org.lxp.study</groupId>
   <artifactId>study-parent</artifactId>
-  <version>1.4.0-RELEASE</version>
+  <version>study-aop-feature-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <name>study-parent</name>
