@@ -378,14 +378,12 @@
     </plugins>
   </build>
   <modules>
-    <module>../java-notes</module>
-    <module>../jersey2demo</module>
-    <module>../study-slb</module>
-    <module>../study-jsoup</module>
-    <module>../rw-splitting</module>
-    <module>../study-activemq</module>
-    <module>../study-redis</module>
-    <module>../multiple-thread</module>
-    <module>../study-aop</module>
+    <module>java-notes</module>
+    <module>jersey2demo</module>
+    <module>study-slb</module>
+    <module>study-jsoup</module>
+    <module>rw-splitting</module>
+    <module>study-activemq</module>
+    <module>study-redis</module>
   </modules>
 </project>
