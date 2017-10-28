@@ -1,6 +1,13 @@
 # study
 All experimental projects  
 
+## multiple-thread
++ study Java multiple threads  
+
+## study-aop
++ Implement AOP base on JDK dynamic proxy
+
+## study-parent
 *study-jsoup*
 + Set timer jobs to capture useful content with Jsoup.  
 
@@ -23,9 +30,3 @@ All experimental projects
 
 *study-redis*
 + test publish/subscribe base on redis
-
-*multiple-thread*
-+ study Java multiple threads
-
-*study-aop*
-+ Implement AOP base on JDK dynamic proxy
