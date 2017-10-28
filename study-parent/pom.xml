@@ -385,7 +385,5 @@
     <module>../rw-splitting</module>
     <module>../study-activemq</module>
     <module>../study-redis</module>
-    <module>../multiple-thread</module>
-    <module>../study-aop</module>
   </modules>
 </project>
