@@ -2,10 +2,13 @@
 All experimental projects  
 
 ## multiple-thread
-+	study Java multiple threads  
++	Study Java multiple threads  
 
 ## study-aop
-+	Implement AOP base on JDK dynamic proxy
++	Implement AOP base on JDK dynamic proxy  
+
+## study-java8
++	Learn more about new features in java8  
 
 ## study-parent
 <table>
