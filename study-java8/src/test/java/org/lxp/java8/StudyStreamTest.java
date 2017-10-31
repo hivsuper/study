@@ -60,4 +60,10 @@ public class StudyStreamTest {
         assertEquals(6, StudyStream.groupby(list).get(12).size());
     }
 
+    @Test
+    public void testFilter() throws Exception {
+        assertEquals(6, StudyStream.filter(list, (Student student) -> student.getAge() == 13,
+                (Student student) -> student.getGender() == 1).size());
+    }
+
 }

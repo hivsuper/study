@@ -41,6 +41,11 @@ public class StudyStream {
         return list.stream().collect(Collectors.groupingBy(Student::getAge));
     }
 
+    public static List<Student> filter(List<Student> list, Predicate<Student> predicate1,
+            Predicate<Student> predicate2) {
+        return list.stream().filter(predicate1).filter(predicate2).collect(Collectors.toList());
+    }
+
     static class Student {
         private String studentNo;
         private String name;
