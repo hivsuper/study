@@ -45,9 +45,19 @@ public class StudyStreamTest {
 
     @Test
     public void testMap() throws Exception {
-        assertEquals(12, StudyStream.map(list, (Student student) -> {
-            return student.getName();
-        }).size());
+        assertEquals(12, StudyStream.map(list, Student::getName).size());
+        assertEquals(6, StudyStream.map(list, (Student student) -> student.getAge() == 12, Student::getName).size());
+    }
+
+    @Test
+    public void testSort() throws Exception {
+        assertEquals("Student [studentNo=20170111, name=student_name_11, gender=1, age=13]",
+                StudyStream.sort(list).get(0).toString());
+    }
+
+    @Test
+    public void testGroupby() throws Exception {
+        assertEquals(6, StudyStream.groupby(list).get(12).size());
     }
 
 }
