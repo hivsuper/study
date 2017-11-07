@@ -9,6 +9,8 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
+import org.lxp.vo.Student;
+
 public class StudyStream {
 
     public static List<Student> collect(List<Student> list, Predicate<Student> predicate) {
@@ -52,49 +54,5 @@ public class StudyStream {
 
     public static long count(List<Student> list, Predicate<Student> predicate) {
         return list.stream().filter(predicate).count();
-    }
-
-    static class Student {
-        private String studentNo;
-        private String name;
-        private int gender;
-        private int age;
-
-        public String getStudentNo() {
-            return studentNo;
-        }
-
-        public void setStudentNo(String studentNo) {
-            this.studentNo = studentNo;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public int getGender() {
-            return gender;
-        }
-
-        public void setGender(int gender) {
-            this.gender = gender;
-        }
-
-        public int getAge() {
-            return age;
-        }
-
-        public void setAge(int age) {
-            this.age = age;
-        }
-
-        @Override
-        public String toString() {
-            return String.format("Student [studentNo=%s, name=%s, gender=%s, age=%s]", studentNo, name, gender, age);
-        }
     }
 }

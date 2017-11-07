@@ -10,7 +10,7 @@ import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.lxp.java8.StudyStream.Student;
+import org.lxp.vo.Student;
 
 public class StudyStreamTest {
     private List<Student> list = new ArrayList<>();
