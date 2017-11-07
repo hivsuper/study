@@ -2,6 +2,7 @@ package org.lxp.java8;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -30,23 +31,23 @@ public class StudyStreamTest {
 
     @Test
     public void testCollect() throws Exception {
-        assertEquals(6, StudyStream.collect(list, (Student student) -> student.getAge() == 12).size());
+        assertEquals(6, StudyStream.collect(list, student -> student.getAge() == 12).size());
     }
 
     @Test
     public void testFindFirst() throws Exception {
-        assertEquals("student_name_00", StudyStream.findFirst(list, (Student student) -> student.getAge() == 12));
+        assertEquals("student_name_00", StudyStream.findFirst(list, student -> student.getAge() == 12));
     }
 
     @Test
     public void testOrElse() throws Exception {
-        assertNotNull(StudyStream.orElse(list, (Student student) -> student.getAge() == 14));
+        assertNotNull(StudyStream.orElse(list, student -> student.getAge() == 14));
     }
 
     @Test
     public void testMap() throws Exception {
         assertEquals(12, StudyStream.map(list, Student::getName).size());
-        assertEquals(6, StudyStream.map(list, (Student student) -> student.getAge() == 12, Student::getName).size());
+        assertEquals(6, StudyStream.map(list, student -> student.getAge() == 12, Student::getName).size());
     }
 
     @Test
@@ -62,8 +63,19 @@ public class StudyStreamTest {
 
     @Test
     public void testFilter() throws Exception {
-        assertEquals(6, StudyStream.filter(list, (Student student) -> student.getAge() == 13,
-                (Student student) -> student.getGender() == 1).size());
+        assertEquals(6, StudyStream.filter(list, student -> student.getAge() == 13, student -> student.getGender() == 1)
+                .size());
+    }
+
+    @Test
+    public void testLimit() throws Exception {
+        assertTrue(StudyStream.limit(list, student -> student.getGender() == 1, 3).stream()
+                .allMatch(student -> student.getGender() == 1));
+    }
+
+    @Test
+    public void testCount() throws Exception {
+        assertEquals(6, StudyStream.count(list, student -> student.getGender() == 1));
     }
 
 }

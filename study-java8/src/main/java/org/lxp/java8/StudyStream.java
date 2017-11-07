@@ -46,6 +46,14 @@ public class StudyStream {
         return list.stream().filter(predicate1).filter(predicate2).collect(Collectors.toList());
     }
 
+    public static List<Student> limit(List<Student> list, Predicate<Student> predicate, int limit) {
+        return list.stream().filter(predicate).limit(limit).collect(Collectors.toList());
+    }
+
+    public static long count(List<Student> list, Predicate<Student> predicate) {
+        return list.stream().filter(predicate).count();
+    }
+
     static class Student {
         private String studentNo;
         private String name;
