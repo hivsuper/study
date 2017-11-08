@@ -1,5 +1,6 @@
 package org.lxp.java8;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Stack;
 import java.util.function.Function;
@@ -24,5 +25,21 @@ public class StudyFunction {
 
     public static int getTotalAgeViaReduce2(List<Student> students) {
         return students.stream().map(Student::getAge).reduce(Integer::sum).orElse(1000);
+    }
+
+    public static int getTotalAgeViaReduce3(List<Student> students) {
+        return students.stream().mapToInt(Student::getAge).sum();
+    }
+
+    public static Student getYoungestStudent(List<Student> students) {
+        return students.stream().reduce((a, b) -> a.getAge() < b.getAge() ? a : b).orElse(null);
+    }
+
+    public static Student getOldestStudent(List<Student> students) {
+        return students.stream().max(Comparator.comparing(Student::getAge)).orElse(null);
+    }
+
+    public static double getAverageAge(List<Student> students) {
+        return students.stream().mapToInt(Student::getAge).average().orElse(0);
     }
 }
