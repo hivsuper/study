@@ -8,6 +8,12 @@ import java.util.function.Function;
 import org.lxp.vo.Student;
 
 public class StudyFunction {
+    /**
+     * 利用function求和
+     * 
+     * @param students
+     * @return
+     */
     public static int getTotalAge(List<Student> students) {
         return totalAgeFunction.apply(students);
     }
@@ -19,14 +25,32 @@ public class StudyFunction {
         return stack.pop();
     };
 
+    /**
+     * 利用reduce求和方法一 最差
+     * 
+     * @param students
+     * @return
+     */
     public static int getTotalAgeViaReduce1(List<Student> students) {
         return students.stream().map(Student::getAge).reduce(0, (a, b) -> a + b);
     }
 
+    /**
+     * 利用reduce求和方法二 中
+     * 
+     * @param students
+     * @return
+     */
     public static int getTotalAgeViaReduce2(List<Student> students) {
         return students.stream().map(Student::getAge).reduce(Integer::sum).orElse(1000);
     }
 
+    /**
+     * 利用reduce求和方法三 最好
+     * 
+     * @param students
+     * @return
+     */
     public static int getTotalAgeViaReduce3(List<Student> students) {
         return students.stream().mapToInt(Student::getAge).sum();
     }
