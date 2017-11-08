@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.junit.Before;
@@ -31,6 +32,13 @@ public class StudyFunctionTest {
     @Test
     public void testGetTotalAge() throws Exception {
         assertEquals(50, StudyFunction.getTotalAge(list), 0);
+    }
+
+    @Test
+    public void testGetTotalAgeViaReduce() throws Exception {
+        assertEquals(50, StudyFunction.getTotalAgeViaReduce1(list), 0);
+        assertEquals(50, StudyFunction.getTotalAgeViaReduce2(list), 0);
+        assertEquals(1000, StudyFunction.getTotalAgeViaReduce2(Collections.emptyList()), 0);
     }
 
 }

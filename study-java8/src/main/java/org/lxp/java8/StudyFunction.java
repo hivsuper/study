@@ -17,4 +17,12 @@ public class StudyFunction {
         students.forEach(student -> stack.push(stack.pop() + student.getAge()));
         return stack.pop();
     };
+
+    public static int getTotalAgeViaReduce1(List<Student> students) {
+        return students.stream().map(Student::getAge).reduce(0, (a, b) -> a + b);
+    }
+
+    public static int getTotalAgeViaReduce2(List<Student> students) {
+        return students.stream().map(Student::getAge).reduce(Integer::sum).orElse(1000);
+    }
 }
