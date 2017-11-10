@@ -39,24 +39,30 @@ public class StudyFunctionTest {
         assertEquals(50, StudyFunction.getTotalAgeViaReduce1(list), 0);
         assertEquals(50, StudyFunction.getTotalAgeViaReduce2(list), 0);
         assertEquals(1000, StudyFunction.getTotalAgeViaReduce2(Collections.emptyList()), 0);
-        assertEquals(50, StudyFunction.getTotalAgeViaReduce3(list), 0);
+        assertEquals(50, StudyFunction.getTotalAgeViaSum(list), 0);
+        assertEquals(50, StudyFunction.getTotalAgeViaSummarizingInt(list), 0);
     }
 
     @Test
     public void testGetYoungestStudent() throws Exception {
         assertEquals("Student [studentNo=20170100, name=student_name_00, gender=0, age=11]",
-                StudyFunction.getYoungestStudent(list).toString());
+                StudyFunction.getYoungestStudentViaReduce(list).toString());
+        assertEquals("Student [studentNo=20170100, name=student_name_00, gender=0, age=11]",
+                StudyFunction.getYoungestStudentViaMinBy(list).toString());
     }
 
     @Test
     public void testGetOldestStudent() throws Exception {
         assertEquals("Student [studentNo=20170103, name=student_name_03, gender=1, age=14]",
-                StudyFunction.getOldestStudent(list).toString());
+                StudyFunction.getOldestStudentViaMax(list).toString());
+        assertEquals("Student [studentNo=20170103, name=student_name_03, gender=1, age=14]",
+                StudyFunction.getOldestStudentViaMaxBy(list).toString());
     }
 
     @Test
     public void testGetAverageAge() throws Exception {
-        assertEquals(12.5, StudyFunction.getAverageAge(list), 0);
+        assertEquals(12.5, StudyFunction.getAverageAgeViaMapToInt(list), 0);
+        assertEquals(12.5, StudyFunction.getAverageAgeViaAveragingInt(list), 0);
     }
 
 }
