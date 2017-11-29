@@ -1,6 +1,9 @@
 # study
 All experimental projects  
 
+## design-pattern
++	Demos for design pattern  
+
 ## multiple-thread
 +	Study Java multiple threads  
 
