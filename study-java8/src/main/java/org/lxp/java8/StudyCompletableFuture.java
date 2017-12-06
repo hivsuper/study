@@ -2,6 +2,7 @@ package org.lxp.java8;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -20,7 +21,7 @@ public class StudyCompletableFuture {
     public static Pair<Long, List<String>> executorService() throws InterruptedException {
         StopWatch stopWatch = new StopWatch();
         stopWatch.start();
-        List<String> list = new ArrayList<>();
+        List<String> list = new Vector<>();
         for (int index = 0; index < MAX_SIZE; index++) {
             final String value = String.valueOf(index);
             executorService.execute(() -> {
