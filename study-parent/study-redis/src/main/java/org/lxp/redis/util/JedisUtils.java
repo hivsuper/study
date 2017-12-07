@@ -1,5 +1,8 @@
 package org.lxp.redis.util;
 
+import java.util.Map;
+import java.util.Map.Entry;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -9,11 +12,11 @@ import redis.clients.jedis.JedisPoolConfig;
 import redis.clients.jedis.JedisPubSub;
 
 public class JedisUtils {
-    static final String PASSWORD = "testpwd";
-    static final int PORT = 6379;
-    static final String HOST = "192.168.68.24";
     private static final Logger LOG = LoggerFactory.getLogger(JedisUtils.class);
-    private static final JedisPool POOL;
+    static final String PASSWORD = "123456";
+    static final int PORT = 6379;
+    static final String HOST = "10.86.16.33";
+    static final JedisPool POOL;
 
     static {
         JedisPoolConfig config = new JedisPoolConfig();// Jedis池配置
@@ -67,7 +70,23 @@ public class JedisUtils {
         }
     }
 
-    private static Jedis getResource() {
+    /**
+     * 批量添加sorted-set
+     * 
+     * @param key
+     * @param values
+     */
+    public static void zadd(String key, Map<String, Double> values) {
+        try (Jedis jedis = getResource()) {
+            for (Entry<String, Double> entry : values.entrySet()) {
+                jedis.zadd(key, entry.getValue(), entry.getKey());
+            }
+        } catch (Exception e) {
+            LOG.error(e.getMessage(), e);
+        }
+    }
+
+    static Jedis getResource() {
         return POOL.getResource();
     }
 }
