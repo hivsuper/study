@@ -29,16 +29,11 @@ public class JedisUtils {
      * @param message
      */
     public static void publishMsg(String channel, String message) {
-        Jedis jedis = null;
-        try {
-            jedis = getResource();
-
+        try (Jedis jedis = getResource()) {
             jedis.publish(channel, message);
             LOG.debug("publishMsg {} = {}", channel, message);
         } catch (Exception e) {
             LOG.error("publishMsg {} = {}", channel, message, e);
-        } finally {
-            returnResource(jedis);
         }
     }
 
@@ -49,16 +44,11 @@ public class JedisUtils {
      * @param message
      */
     public static void publishMsg(byte[] channel, byte[] message) {
-        Jedis jedis = null;
-        try {
-            jedis = getResource();
-
+        try (Jedis jedis = getResource()) {
             jedis.publish(channel, message);
             LOG.debug("publishMsg {} = {}", channel, message);
         } catch (Exception e) {
             LOG.error("publishMsg {} = {}", channel, message, e);
-        } finally {
-            returnResource(jedis);
         }
     }
 
@@ -69,25 +59,15 @@ public class JedisUtils {
      * @param channels
      */
     public static void subscribeMsg(JedisPubSub jedisPubSub, String... channels) {
-        Jedis jedis = null;
-        try {
-            jedis = getResource();
+        try (Jedis jedis = getResource()) {
             jedis.subscribe(jedisPubSub, channels);
             LOG.debug("subscribeMsg {} = {}", jedisPubSub, channels);
         } catch (Exception e) {
             LOG.error("subscribeMsg {} = {}", jedisPubSub, channels, e);
-        } finally {
-            returnResource(jedis);
         }
     }
 
     private static Jedis getResource() {
         return POOL.getResource();
-    }
-
-    private static void returnResource(Jedis jedis) {
-        if (jedis != null) {
-            jedis.close();
-        }
     }
 }
