@@ -64,4 +64,17 @@ public class StudyOptionalTest {
     public void testGetClazzNameViaMapWhenNull() throws Exception {
         optional.getClazzNameViaMap(null).get();
     }
+
+    @Test
+    public void testGetClazzNameViaOrElseGet() throws Exception {
+        String defaultValue = "defaultValue";
+        Assert.assertEquals(clazzName, optional.getClazzNameViaOrElseGet(clazz, defaultValue));
+        Assert.assertEquals(defaultValue, optional.getClazzNameViaOrElseGet(null, defaultValue));
+    }
+
+    @Test
+    public void testGetFirstStudentNoInClazz() throws Exception {
+        Assert.assertEquals("20170100", optional.getFirstStudentNoInClazz(clazz));
+        Assert.assertNull(optional.getFirstStudentNoInClazz(null));
+    }
 }
