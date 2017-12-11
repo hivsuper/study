@@ -3,6 +3,8 @@ package org.lxp.java8;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -11,8 +13,9 @@ import org.lxp.vo.Clazz;
 import org.lxp.vo.Student;
 
 public class StudyOptionalTest {
-    private final StudyOptional<Clazz> optional = new StudyOptional<>();
-    private final Clazz clazz = new Clazz();
+    private static final String clazzName = "一年一班";
+    private final StudyOptional optional = new StudyOptional();
+    private Clazz clazz;
 
     @Before
     public void setUp() throws Exception {
@@ -28,7 +31,7 @@ public class StudyOptionalTest {
             student.setAge(12 + i % 2);
             list.add(student);
         }
-        clazz.setStudents(list);
+        clazz = new Clazz(clazzName, "Mr Lee", list);
     }
 
     @Test(expected = NullPointerException.class)
@@ -43,7 +46,8 @@ public class StudyOptionalTest {
 
     @Test
     public void getNullableWhenNull() throws Exception {
-        Assert.assertNull(optional.getNullable(null));
+        Assert.assertFalse(optional.getNullable(null).isPresent());
+        Assert.assertEquals(Optional.empty(), optional.getNullable(null));
     }
 
     @Test
@@ -51,4 +55,13 @@ public class StudyOptionalTest {
         Assert.assertEquals(clazz, optional.getNullable(clazz).get());
     }
 
+    @Test
+    public void testGetClazzNameViaMapWhenNotNull() throws Exception {
+        Assert.assertEquals(clazzName, optional.getClazzNameViaMap(clazz).get());
+    }
+
+    @Test(expected = NoSuchElementException.class)
+    public void testGetClazzNameViaMapWhenNull() throws Exception {
+        optional.getClazzNameViaMap(null).get();
+    }
 }

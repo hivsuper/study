@@ -7,28 +7,22 @@ public class Clazz {
     private String teacherName;
     private List<Student> students;
 
-    public String getClazzName() {
-        return clazzName;
+    public Clazz(String clazzName, String teacherName, List<Student> students) {
+        this.clazzName = clazzName;
+        this.teacherName = teacherName;
+        this.students = students;
     }
 
-    public void setClazzName(String clazzName) {
-        this.clazzName = clazzName;
+    public String getClazzName() {
+        return clazzName;
     }
 
     public String getTeacherName() {
         return teacherName;
     }
 
-    public void setTeacherName(String teacherName) {
-        this.teacherName = teacherName;
-    }
-
     public List<Student> getStudents() {
         return students;
-    }
-
-    public void setStudents(List<Student> students) {
-        this.students = students;
     }
 
     @Override

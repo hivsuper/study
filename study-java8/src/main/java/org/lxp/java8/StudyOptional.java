@@ -2,12 +2,19 @@ package org.lxp.java8;
 
 import java.util.Optional;
 
-public class StudyOptional<T> {
-    public Optional<T> get(T t) {
-        return Optional.of(t);
+import org.lxp.vo.Clazz;
+
+public class StudyOptional {
+    public Optional<Clazz> get(Clazz clazz) {
+        return Optional.of(clazz);
     }
 
-    public Optional<T> getNullable(T t) {
-        return Optional.ofNullable(t);
+    public Optional<Clazz> getNullable(Clazz clazz) {
+        return Optional.ofNullable(clazz);
+    }
+
+    public Optional<String> getClazzNameViaMap(Clazz clazz) {
+        Optional<Clazz> optional = getNullable(clazz);
+        return optional.map(Clazz::getClazzName);
     }
 }
