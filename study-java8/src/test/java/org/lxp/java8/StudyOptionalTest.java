@@ -88,4 +88,12 @@ public class StudyOptionalTest {
         Assert.assertEquals("111", _111.map(s -> s).orElseGet(() -> _222.map(s -> s).orElse("333")));
         Assert.assertEquals("333", _null1.map(s -> s).orElseGet(() -> _null2.map(s -> s).orElse("333")));
     }
+
+    @Test
+    public void testIfPresent() throws Exception {
+        StringBuilder sb = new StringBuilder();
+        Optional<String> _null1 = Optional.ofNullable(null);
+        _null1.ifPresent(x -> sb.append("111"));
+        Assert.assertTrue(sb.length() == 0);
+    }
 }
