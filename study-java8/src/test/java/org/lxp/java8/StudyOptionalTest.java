@@ -77,4 +77,15 @@ public class StudyOptionalTest {
         Assert.assertEquals("20170100", optional.getFirstStudentNoInClazz(clazz));
         Assert.assertNull(optional.getFirstStudentNoInClazz(null));
     }
+
+    @Test
+    public void testMapAndOrElseGet() throws Exception {
+        Optional<String> _null1 = Optional.ofNullable(null);
+        Optional<String> _111 = Optional.ofNullable("111");
+        Optional<String> _222 = Optional.ofNullable("222");
+        Optional<String> _null2 = Optional.ofNullable(null);
+        Assert.assertEquals("222", _null1.map(s -> s).orElseGet(() -> _222.map(s -> s).orElse("333")));
+        Assert.assertEquals("111", _111.map(s -> s).orElseGet(() -> _222.map(s -> s).orElse("333")));
+        Assert.assertEquals("333", _null1.map(s -> s).orElseGet(() -> _null2.map(s -> s).orElse("333")));
+    }
 }
