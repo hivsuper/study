@@ -33,15 +33,15 @@ public class StudyLocalDateTimeTest {
     public void testAddOneDay() throws Exception {
         String format = "yyyy-MM-dd HH:mm:ss";
         String date = "2017-07-31 00:00:00";
-        Assert.assertEquals("2017-08-01 00:00:00", StudyLocalDateTime
-                .format(StudyLocalDateTime.addOneDay(StudyLocalDateTime.parseViaLocalDateTime(date, format)), format));
+        Assert.assertEquals("2017-08-01 00:00:00", StudyDateTimeFormatter.format(
+                StudyLocalDateTime.addOneDay(StudyLocalDateTime.parseViaLocalDateTime(date, format)), format));
     }
 
     @Test
     public void testSetDayOfMonth() throws Exception {
         String format = "yyyy-MM-dd HH:mm:ss";
         String date = "2017-07-01 00:00:00";
-        Assert.assertEquals("2017-07-15 00:00:00", StudyLocalDateTime.format(
+        Assert.assertEquals("2017-07-15 00:00:00", StudyDateTimeFormatter.format(
                 StudyLocalDateTime.setDayOfMonth(StudyLocalDateTime.parseViaLocalDateTime(date, format), 15), format));
     }
 }

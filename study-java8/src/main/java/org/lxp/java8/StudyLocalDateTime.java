@@ -17,12 +17,7 @@ public class StudyLocalDateTime {
 
     public static String get20170701ViaLocalDateTime(String format) {
         LocalDateTime localDateTime = LocalDateTime.of(2017, 7, 1, 0, 0);
-        return format(localDateTime, format);
-    }
-
-    public static String format(LocalDateTime localDateTime, String format) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(format);
-        return localDateTime.format(formatter);
+        return StudyDateTimeFormatter.format(localDateTime, format);
     }
 
     public static long getMillis(LocalDateTime localDateTime) {
