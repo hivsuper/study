@@ -4,6 +4,9 @@ All experimental projects
 ## design-pattern
 +	Demos for design pattern  
 
+## mockito-demos
++	Demos for mockito2/powermock  
+
 ## multiple-thread
 +	Study Java multiple threads  
 
