@@ -49,11 +49,26 @@ public class StudyLocalDateTime {
         return localDateTime1.compareTo(localDateTime2) > 0;
     }
 
+    /**
+     * Seconds of localDateTime1-localDateTime2
+     * 
+     * @param localDateTime1
+     * @param localDateTime2
+     * @param zoneOffset
+     * @return
+     */
     public static long differentSeconds(LocalDateTime localDateTime1, LocalDateTime localDateTime2,
             ZoneOffset zoneOffset) {
         return localDateTime1.toEpochSecond(zoneOffset) - localDateTime2.toEpochSecond(zoneOffset);
     }
 
+    /**
+     * Days of localDateTime1-localDateTime2
+     * 
+     * @param localDateTime1
+     * @param localDateTime2
+     * @return
+     */
     public static long differentDays(LocalDateTime localDateTime1, LocalDateTime localDateTime2) {
         return localDateTime1.toLocalDate().toEpochDay() - localDateTime2.toLocalDate().toEpochDay();
     }
