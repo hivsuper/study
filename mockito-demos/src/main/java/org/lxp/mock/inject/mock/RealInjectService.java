@@ -1,5 +1,5 @@
 package org.lxp.mock.inject.mock;
 
-public interface RealService {
+public interface RealInjectService {
     public String getName();
 }

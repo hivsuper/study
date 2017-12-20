@@ -4,10 +4,10 @@ import javax.annotation.Resource;
 import javax.inject.Named;
 
 import org.lxp.mock.inject.mock.InjectService;
-import org.lxp.mock.inject.mock.RealService;
+import org.lxp.mock.inject.mock.RealInjectService;
 
 @Named("realService")
-public class RealServiceImpl implements RealService {
+public class RealInjectServiceImpl implements RealInjectService {
     @Resource
     private InjectService injectService;
 
