@@ -1,4 +1,4 @@
-package org.lxp.mock.service.inject.mock;
+package org.lxp.mock.inject.mock;
 
 import javax.inject.Named;
 

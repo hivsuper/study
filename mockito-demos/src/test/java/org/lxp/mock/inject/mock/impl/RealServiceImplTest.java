@@ -1,11 +1,12 @@
-package org.lxp.mock.service.inject.mock.impl;
+package org.lxp.mock.inject.mock.impl;
 
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.lxp.mock.service.inject.mock.InjectService;
-import org.lxp.mock.service.inject.mock.RealService;
+import org.lxp.mock.inject.mock.InjectService;
+import org.lxp.mock.inject.mock.RealService;
+import org.lxp.mock.inject.mock.impl.RealServiceImpl;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;

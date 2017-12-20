@@ -1,10 +1,10 @@
-package org.lxp.mock.service.inject.mock.impl;
+package org.lxp.mock.inject.mock.impl;
 
 import javax.annotation.Resource;
 import javax.inject.Named;
 
-import org.lxp.mock.service.inject.mock.InjectService;
-import org.lxp.mock.service.inject.mock.RealService;
+import org.lxp.mock.inject.mock.InjectService;
+import org.lxp.mock.inject.mock.RealService;
 
 @Named("realService")
 public class RealServiceImpl implements RealService {
