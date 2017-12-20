@@ -1,5 +1,6 @@
 package org.lxp.mock.captor.impl;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.junit.Assert;
@@ -58,6 +59,28 @@ public class RealCaptorServiceImplTest {
         CaptorModel captorModel = new CaptorModel("propertyString", 1);
         Mockito.doThrow(new IllegalArgumentException("s")).when(captorService).execute(captorModel);
         realCaptorService.execute(captorModel);
+    }
+
+    @Test
+    public void returnDifferentValueInMultiCalls() throws Exception {
+        Mockito.doReturn("1", "a", "b").when(captorService).execute(Mockito.any(CaptorModel.class));
+        List<String> rtn = realCaptorService.execute(4);
+        Mockito.verify(captorService, Mockito.times(3)).execute(Mockito.any(CaptorModel.class));
+        Assert.assertEquals("[1, a, b]", rtn.toString());
+    }
+
+    @Test
+    public void spy() throws Exception {
+        // 测试模拟
+        RealCaptorService spy = Mockito.spy(new RealCaptorServiceImpl(captorService));
+        Mockito.doReturn(Collections.singletonList("1")).when(spy).execute(Mockito.eq(4));
+        Assert.assertEquals("[1]", spy.execute(4).toString());
+
+        // 测试真实调用
+        Mockito.doReturn("1", "a").when(captorService).execute(Mockito.any(CaptorModel.class));
+        List<String> rtn = spy.execute(3);
+        Mockito.verify(captorService, Mockito.times(2)).execute(Mockito.any(CaptorModel.class));
+        Assert.assertEquals("[1, a]", rtn.toString());
     }
 
 }
