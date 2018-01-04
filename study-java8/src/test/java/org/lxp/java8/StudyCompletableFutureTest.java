@@ -18,16 +18,30 @@ public class StudyCompletableFutureTest {
     }
 
     @Test
-    public void testCompletableFuture() throws Exception {
-        Pair<Long, List<String>> pair = StudyCompletableFuture.completableFuture();
-        System.out.println("completableFuture:" + pair.getLeft());
+    public void testCompletableFutureSupplyAsync() throws Exception {
+        Pair<Long, List<String>> pair = StudyCompletableFuture.completableFutureSupplyAsync();
+        System.out.println("completableFutureSupplyAsync:" + pair.getLeft());
         Assert.assertEquals(StudyCompletableFuture.MAX_SIZE, pair.getRight().size());
     }
 
     @Test
-    public void testCompletableFutureWithExecutorService() throws Exception {
-        Pair<Long, List<String>> pair = StudyCompletableFuture.completableFutureWithExecutorService();
-        System.out.println("completableFutureWithExecutorService:" + pair.getLeft());
+    public void testCompletableFutureSupplyAsyncWithExecutorService() throws Exception {
+        Pair<Long, List<String>> pair = StudyCompletableFuture.completableFutureSupplyAsyncWithExecutorService();
+        System.out.println("completableFutureSupplyAsyncWithExecutorService:" + pair.getLeft());
+        Assert.assertEquals(StudyCompletableFuture.MAX_SIZE, pair.getRight().size());
+    }
+
+    @Test
+    public void testCompletableFutureRunAsync() throws Exception {
+        Pair<Long, List<String>> pair = StudyCompletableFuture.completableFutureRunAsync();
+        System.out.println("completableFutureRunAsync:" + pair.getLeft());
+        Assert.assertEquals(StudyCompletableFuture.MAX_SIZE, pair.getRight().size());
+    }
+
+    @Test
+    public void testCompletableFutureRunAsyncWithExecutorService() throws Exception {
+        Pair<Long, List<String>> pair = StudyCompletableFuture.completableFutureRunAsyncWithExecutorService();
+        System.out.println("completableFutureRunAsyncWithExecutorService:" + pair.getLeft());
         Assert.assertEquals(StudyCompletableFuture.MAX_SIZE, pair.getRight().size());
     }
 
