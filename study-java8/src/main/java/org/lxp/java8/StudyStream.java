@@ -2,12 +2,14 @@ package org.lxp.java8;
 
 import static java.util.Comparator.comparingInt;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.lxp.vo.Student;
 
@@ -54,5 +56,14 @@ public class StudyStream {
 
     public static long count(List<Student> list, Predicate<Student> predicate) {
         return list.stream().filter(predicate).count();
+    }
+
+    public static List<String> flatMap(String[]... lists) {
+        List<String> rtn = Collections.emptyList();
+        if (lists != null && lists.length > 0) {
+            rtn = Stream.of(lists).flatMap(array -> Stream.of(array)).map(s -> s.toUpperCase())
+                    .collect(Collectors.toList());
+        }
+        return rtn;
     }
 }

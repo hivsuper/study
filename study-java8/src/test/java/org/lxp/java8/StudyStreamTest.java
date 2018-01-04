@@ -78,4 +78,12 @@ public class StudyStreamTest {
         assertEquals(6, StudyStream.count(list, student -> student.getGender() == 1));
     }
 
+    @Test
+    public void testFlatMap() throws Exception {
+        String[] array1 = { "a", "b" };
+        String[] array2 = { "c", "d" };
+        String[] array3 = { "e", "f" };
+        assertEquals("[A, B, C, D, E, F]", StudyStream.flatMap(array1, array2, array3).toString());
+    }
+
 }
