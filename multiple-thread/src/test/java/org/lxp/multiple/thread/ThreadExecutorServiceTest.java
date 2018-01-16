@@ -1,15 +1,19 @@
 package org.lxp.multiple.thread;
 
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.lxp.multiple.thread.task.SumTask;
 
 /**
  * @Description: 测试ExecutorService
@@ -100,6 +104,12 @@ public class ThreadExecutorServiceTest {
         return sb.toString();
     }
 
+    private static int testForkJoinPool(List<Integer> list) throws InterruptedException, ExecutionException {
+        ForkJoinPool forkJoinPool = new ForkJoinPool(8);
+        Future<Integer> future = forkJoinPool.submit(new SumTask(list));
+        return future.get();
+    }
+
     @Test
     public void test() throws InterruptedException, ExecutionException {
         Assert.assertTrue(submitRunnable());
@@ -108,6 +118,9 @@ public class ThreadExecutorServiceTest {
         Assert.assertTrue(submitNonBlockCallable());
         Assert.assertTrue(shutdown().isEmpty());
         Assert.assertEquals(THIS_IS_SHUTDOWN_WITH_AWAIT_TERMINATION, shutdownWithAwaitTermination());
+        Assert.assertEquals(10, testForkJoinPool(Arrays.asList(new Integer[] { 1, 2, 3, 4 })));
+        Assert.assertEquals(49, testForkJoinPool(Arrays.asList(new Integer[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 })));
+        Assert.assertEquals(60, testForkJoinPool(Arrays.asList(new Integer[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 })));
     }
 
 }
