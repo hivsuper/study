@@ -1,4 +1,4 @@
-package org.lxp.mutiple.thread;
+package org.lxp.multiple.thread;
 
 import java.util.Date;
 import java.util.concurrent.Callable;

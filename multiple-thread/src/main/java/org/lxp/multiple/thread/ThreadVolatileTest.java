@@ -1,4 +1,4 @@
-package org.lxp.mutiple.thread;
+package org.lxp.multiple.thread;
 
 /**
  * @Description: 测试volatile

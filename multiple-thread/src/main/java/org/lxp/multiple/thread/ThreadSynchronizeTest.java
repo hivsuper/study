@@ -1,4 +1,4 @@
-package org.lxp.mutiple.thread;
+package org.lxp.multiple.thread;
 
 import java.util.Stack;
 import java.util.concurrent.ArrayBlockingQueue;
