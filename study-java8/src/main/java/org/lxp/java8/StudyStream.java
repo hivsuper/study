@@ -45,6 +45,10 @@ public class StudyStream {
         return list.stream().collect(Collectors.groupingBy(Student::getAge));
     }
 
+    public static Map<Integer, Set<Student>> groupbyToSet(List<Student> list) {
+        return list.stream().collect(Collectors.groupingBy(Student::getAge, Collectors.toSet()));
+    }
+
     public static List<Student> filter(List<Student> list, Predicate<Student> predicate1,
             Predicate<Student> predicate2) {
         return list.stream().filter(predicate1).filter(predicate2).collect(Collectors.toList());

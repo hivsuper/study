@@ -62,6 +62,16 @@ public class StudyStreamTest {
     }
 
     @Test
+    public void testGroupbyToSet() throws Exception {
+        List<Student> students = new ArrayList<>(list);
+        students.addAll(list);
+        assertEquals(24, students.size());
+        assertEquals(6, StudyStream.groupbyToSet(students).get(12).size());
+        assertEquals(12, StudyStream.groupbyToSet(students).entrySet().stream()
+                .mapToInt(entry -> entry.getValue().size()).sum());
+    }
+
+    @Test
     public void testFilter() throws Exception {
         assertEquals(6, StudyStream.filter(list, student -> student.getAge() == 13, student -> student.getGender() == 1)
                 .size());
