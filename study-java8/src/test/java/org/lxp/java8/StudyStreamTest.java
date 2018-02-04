@@ -72,6 +72,13 @@ public class StudyStreamTest {
     }
 
     @Test
+    public void testToMap() throws Exception {
+        assertEquals(6, StudyStream.toMap1(list).size());
+        assertEquals(13, StudyStream.toMap1(list).get("20170111").getAge());
+        assertEquals("student_name_11", StudyStream.toMap2(list).get("20170111"));
+    }
+
+    @Test
     public void testFilter() throws Exception {
         assertEquals(6, StudyStream.filter(list, student -> student.getAge() == 13, student -> student.getGender() == 1)
                 .size());
