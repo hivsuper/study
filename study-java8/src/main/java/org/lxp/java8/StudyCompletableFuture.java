@@ -94,7 +94,7 @@ public class StudyCompletableFuture {
         /**
          * invoke count to guarantee all threads have finished
          */
-        futures.stream().map(CompletableFuture::join).count();
+        futures.forEach(CompletableFuture::join);
         stopWatch.stop();
         return ImmutablePair.of(stopWatch.getTime(), rtn);
     }
@@ -116,7 +116,7 @@ public class StudyCompletableFuture {
         /**
          * invoke count to guarantee all threads have finished
          */
-        futures.stream().map(CompletableFuture::join).count();
+        futures.forEach(CompletableFuture::join);
         stopWatch.stop();
         return ImmutablePair.of(stopWatch.getTime(), rtn);
     }
