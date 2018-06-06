@@ -50,7 +50,7 @@ public class StudyStream {
     }
 
     public static Map<String, Student> toMap1(List<Student> list) {
-        return list.stream().collect(Collectors.toMap(Student::getStudentNo, student -> student));
+        return list.stream().collect(Collectors.toMap(Student::getStudentNo, Function.identity()));
     }
 
     public static Map<String, String> toMap2(List<Student> list) {
