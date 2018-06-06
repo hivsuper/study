@@ -21,15 +21,10 @@ public class StudyOptionalTest {
     public void setUp() throws Exception {
         int MAX_SIZE = 5;
         List<Student> list = new ArrayList<>();
+        DecimalFormat format = (DecimalFormat) DecimalFormat.getInstance();
+        format.applyPattern("00");
         for (int i = 0; i < MAX_SIZE; i++) {
-            DecimalFormat format = (DecimalFormat) DecimalFormat.getInstance();
-            format.applyPattern("00");
-            Student student = new Student();
-            student.setStudentNo("201701" + format.format(i));
-            student.setGender(i % 2);
-            student.setName("student_name_" + format.format(i));
-            student.setAge(12 + i % 2);
-            list.add(student);
+            list.add(new Student("201701" + format.format(i), "student_name_" + format.format(i), i % 2, 12 + i % 2));
         }
         clazz = new Clazz(clazzName, "Mr Lee", list);
     }

@@ -6,36 +6,27 @@ public class Student {
     private int gender;
     private int age;
 
-    public String getStudentNo() {
-        return studentNo;
+    public Student(String studentNo, String name, int gender, int age) {
+        this.studentNo = studentNo;
+        this.name = name;
+        this.gender = gender;
+        this.age = age;
     }
 
-    public void setStudentNo(String studentNo) {
-        this.studentNo = studentNo;
+    public String getStudentNo() {
+        return studentNo;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public int getGender() {
         return gender;
     }
 
-    public void setGender(int gender) {
-        this.gender = gender;
-    }
-
     public int getAge() {
         return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
     }
 
     @Override

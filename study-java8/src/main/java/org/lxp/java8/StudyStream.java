@@ -24,7 +24,7 @@ public class StudyStream {
     }
 
     public static Student orElse(List<Student> list, Predicate<Student> predicate) {
-        return list.stream().filter(predicate).findFirst().orElse(new Student());
+        return list.stream().filter(predicate).findFirst().orElse(null);
     }
 
     public static List<String> map(List<Student> list, Function<Student, String> function) {

@@ -1,7 +1,7 @@
 package org.lxp.java8;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import java.text.DecimalFormat;
@@ -20,12 +20,7 @@ public class StudyStreamTest {
         DecimalFormat format = (DecimalFormat) DecimalFormat.getInstance();
         format.applyPattern("00");
         for (int i = 0; i < 12; i++) {
-            Student student = new Student();
-            student.setStudentNo("201701" + format.format(i));
-            student.setGender(i % 2);
-            student.setName("student_name_" + format.format(i));
-            student.setAge(12 + i % 2);
-            list.add(student);
+            list.add(new Student("201701" + format.format(i), "student_name_" + format.format(i), i % 2, 12 + i % 2));
         }
     }
 
@@ -41,7 +36,7 @@ public class StudyStreamTest {
 
     @Test
     public void testOrElse() throws Exception {
-        assertNotNull(StudyStream.orElse(list, student -> student.getAge() == 14));
+        assertNull(StudyStream.orElse(list, student -> student.getAge() == 14));
     }
 
     @Test

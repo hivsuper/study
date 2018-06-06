@@ -20,12 +20,7 @@ public class StudyFunctionTest {
         DecimalFormat format = (DecimalFormat) DecimalFormat.getInstance();
         format.applyPattern("00");
         for (int i = 0; i < 4; i++) {
-            Student student = new Student();
-            student.setStudentNo("201701" + format.format(i));
-            student.setGender(i % 2);
-            student.setName("student_name_" + format.format(i));
-            student.setAge(11 + i);
-            list.add(student);
+            list.add(new Student("201701" + format.format(i), "student_name_" + format.format(i), i % 2, 11 + i));
         }
     }
 
