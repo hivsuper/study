@@ -74,6 +74,38 @@ public class StudyStreamTest {
     }
 
     @Test
+    public void testPartition() {
+        assertEquals(
+                "{false=[Student [studentNo=20170101, name=student_name_01, gender=1, age=13], "
+                        + "Student [studentNo=20170103, name=student_name_03, gender=1, age=13], "
+                        + "Student [studentNo=20170105, name=student_name_05, gender=1, age=13], "
+                        + "Student [studentNo=20170107, name=student_name_07, gender=1, age=13], "
+                        + "Student [studentNo=20170109, name=student_name_09, gender=1, age=13], "
+                        + "Student [studentNo=20170111, name=student_name_11, gender=1, age=13]], "
+                        + "true=[Student [studentNo=20170100, name=student_name_00, gender=0, age=12], "
+                        + "Student [studentNo=20170102, name=student_name_02, gender=0, age=12], "
+                        + "Student [studentNo=20170104, name=student_name_04, gender=0, age=12], "
+                        + "Student [studentNo=20170106, name=student_name_06, gender=0, age=12], "
+                        + "Student [studentNo=20170108, name=student_name_08, gender=0, age=12], "
+                        + "Student [studentNo=20170110, name=student_name_10, gender=0, age=12]]}",
+                StudyStream.partition(list, student -> student.getAge() == 12).toString());
+        assertEquals(
+                "{false=[Student [studentNo=20170100, name=student_name_00, gender=0, age=12], "
+                        + "Student [studentNo=20170101, name=student_name_01, gender=1, age=13], "
+                        + "Student [studentNo=20170102, name=student_name_02, gender=0, age=12], "
+                        + "Student [studentNo=20170103, name=student_name_03, gender=1, age=13], "
+                        + "Student [studentNo=20170104, name=student_name_04, gender=0, age=12], "
+                        + "Student [studentNo=20170105, name=student_name_05, gender=1, age=13], "
+                        + "Student [studentNo=20170106, name=student_name_06, gender=0, age=12], "
+                        + "Student [studentNo=20170107, name=student_name_07, gender=1, age=13], "
+                        + "Student [studentNo=20170108, name=student_name_08, gender=0, age=12], "
+                        + "Student [studentNo=20170109, name=student_name_09, gender=1, age=13], "
+                        + "Student [studentNo=20170110, name=student_name_10, gender=0, age=12], "
+                        + "Student [studentNo=20170111, name=student_name_11, gender=1, age=13]], true=[]}",
+                StudyStream.partition(list, student -> student.getAge() == 14).toString());
+    }
+
+    @Test
     public void testFilter() throws Exception {
         assertEquals(6, StudyStream.filter(list, student -> student.getAge() == 13, student -> student.getGender() == 1)
                 .size());

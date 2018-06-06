@@ -57,6 +57,10 @@ public class StudyStream {
         return list.stream().collect(Collectors.toMap(Student::getStudentNo, Student::getName));
     }
 
+    public static Map<Boolean, List<Student>> partition(List<Student> list, Predicate<Student> predicate) {
+        return list.stream().collect(Collectors.partitioningBy(predicate));
+    }
+
     public static List<Student> filter(List<Student> list, Predicate<Student> predicate1,
             Predicate<Student> predicate2) {
         return list.stream().filter(predicate1).filter(predicate2).collect(Collectors.toList());
