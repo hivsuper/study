@@ -5,6 +5,7 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
@@ -64,6 +65,16 @@ public class CollectionToMapTest {
         assertEquals("{name5=Student [studentNo=null, name=name5, gender=true, age=2], "
                 + "name4=Student [studentNo=4, name=name4, gender=true, age=2], "
                 + "name2=Student [studentNo=2, name=name2, gender=false, age=2], "
+                + "name1=Student [studentNo=1, name=name1, gender=false, age=2]}", map.toString());
+    }
+
+    @Test
+    public void shouldReturnMapWhenCollectDuplicateKey() {
+        Map<String, Student> map = fakeStudent().stream().collect(HashMap::new, (m, v) -> m.put(v.getName(), v),
+                HashMap::putAll);
+        assertEquals("{name5=Student [studentNo=null, name=name5, gender=true, age=2], "
+                + "name4=Student [studentNo=4, name=name4, gender=true, age=2], "
+                + "name2=Student [studentNo=3, name=name2, gender=null, age=2], "
                 + "name1=Student [studentNo=1, name=name1, gender=false, age=2]}", map.toString());
     }
 
