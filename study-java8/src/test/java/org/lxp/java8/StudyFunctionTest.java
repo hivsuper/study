@@ -20,7 +20,7 @@ public class StudyFunctionTest {
         DecimalFormat format = (DecimalFormat) DecimalFormat.getInstance();
         format.applyPattern("00");
         for (int i = 0; i < 4; i++) {
-            list.add(new Student("201701" + format.format(i), "student_name_" + format.format(i), i % 2, 11 + i));
+            list.add(new Student("201701" + format.format(i), "student_name_" + format.format(i), i % 2 == 0, 11 + i));
         }
     }
 
@@ -40,17 +40,17 @@ public class StudyFunctionTest {
 
     @Test
     public void testGetYoungestStudent() throws Exception {
-        assertEquals("Student [studentNo=20170100, name=student_name_00, gender=0, age=11]",
+        assertEquals("Student [studentNo=20170100, name=student_name_00, gender=true, age=11]",
                 StudyFunction.getYoungestStudentViaReduce(list).toString());
-        assertEquals("Student [studentNo=20170100, name=student_name_00, gender=0, age=11]",
+        assertEquals("Student [studentNo=20170100, name=student_name_00, gender=true, age=11]",
                 StudyFunction.getYoungestStudentViaMinBy(list).toString());
     }
 
     @Test
     public void testGetOldestStudent() throws Exception {
-        assertEquals("Student [studentNo=20170103, name=student_name_03, gender=1, age=14]",
+        assertEquals("Student [studentNo=20170103, name=student_name_03, gender=false, age=14]",
                 StudyFunction.getOldestStudentViaMax(list).toString());
-        assertEquals("Student [studentNo=20170103, name=student_name_03, gender=1, age=14]",
+        assertEquals("Student [studentNo=20170103, name=student_name_03, gender=false, age=14]",
                 StudyFunction.getOldestStudentViaMaxBy(list).toString());
     }
 

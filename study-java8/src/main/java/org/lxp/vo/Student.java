@@ -3,10 +3,10 @@ package org.lxp.vo;
 public class Student {
     private String studentNo;
     private String name;
-    private int gender;
+    private Boolean gender;
     private int age;
 
-    public Student(String studentNo, String name, int gender, int age) {
+    public Student(String studentNo, String name, Boolean gender, int age) {
         this.studentNo = studentNo;
         this.name = name;
         this.gender = gender;
@@ -21,7 +21,7 @@ public class Student {
         return name;
     }
 
-    public int getGender() {
+    public Boolean getGender() {
         return gender;
     }
 

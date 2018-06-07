@@ -24,7 +24,7 @@ public class StudyOptionalTest {
         DecimalFormat format = (DecimalFormat) DecimalFormat.getInstance();
         format.applyPattern("00");
         for (int i = 0; i < MAX_SIZE; i++) {
-            list.add(new Student("201701" + format.format(i), "student_name_" + format.format(i), i % 2, 12 + i % 2));
+            list.add(new Student("201701" + format.format(i), "student_name_" + format.format(i), i % 2==0, 12 + i % 2));
         }
         clazz = new Clazz(clazzName, "Mr Lee", list);
     }
