@@ -14,6 +14,9 @@ import java.util.stream.Collectors;
 import org.junit.Test;
 import org.lxp.vo.Student;
 
+/**
+ * @see https://www.cnblogs.com/hiver/p/9156147.html
+ */
 public class CollectionToMapTest {
     private List<Student> fakeStudent() {
         List<Student> students = new ArrayList<>();
