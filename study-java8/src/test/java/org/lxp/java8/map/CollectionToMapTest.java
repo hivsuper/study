@@ -45,7 +45,7 @@ public class CollectionToMapTest {
     }
 
     @Test(expected = NullPointerException.class)
-    public void shouldReturnMapWhenpartitioningByNullKey() {
+    public void shouldReturnMapWhenPartitioningByNullKey() {
         fakeStudent().stream().collect(Collectors.partitioningBy(Student::getGender));
     }
 
