@@ -2,28 +2,38 @@ package org.lxp.redis.pubsub;
 
 import java.util.concurrent.CountDownLatch;
 
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
 import org.lxp.redis.util.JedisHelper;
 import org.lxp.redis.util.JedisUtils;
 
+/**
+ * How to test?</br>
+ * 1. Run {@link #testSubscribeMsg()}</br>
+ * 2. Run {@link #testPublishMsg()}, message will be sent to #1</br>
+ * 3. RUn {@link #testUnsubscribe()}, message will be sent to #1 and it will stop.
+ */
 public class RedisMsgPubSubListenerTest {
     private static final String NEWS_SHARE_CHANNEL = "news.share";
-    private static RedisMsgPubSubListener pubsub;
+    private RedisMsgPubSubListener pubsub;
+    private JedisUtils jedisUtils;
+    private JedisHelper jedisHelper;
 
-    @BeforeClass
-    public static void setUp() {
+    @Before
+    public void setUp() {
         pubsub = new RedisMsgPubSubListener();
+        jedisUtils = new JedisUtils();
+        jedisHelper = new JedisHelper(jedisUtils);
     }
 
     @Test
     public void testSubscribeMsg() throws InterruptedException {
-        JedisUtils.subscribeMsg(pubsub, NEWS_SHARE_CHANNEL);
+        jedisUtils.subscribeMsg(pubsub, NEWS_SHARE_CHANNEL);
     }
 
     @Test
     public void testPublishMsg() {
-        JedisUtils.publishMsg(NEWS_SHARE_CHANNEL, "测试sssssssssss#@$%&*()*&");
+        jedisUtils.publishMsg(NEWS_SHARE_CHANNEL, "测试sssssssssss#@$%&*()*&");
     }
 
     @Test
@@ -32,7 +42,7 @@ public class RedisMsgPubSubListenerTest {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                JedisHelper.publishMsg(NEWS_SHARE_CHANNEL, "stop");
+                jedisHelper.publishMsg(NEWS_SHARE_CHANNEL, "stop");
                 countDownLatch.countDown();
             }
         }, "unsubscribe").start();

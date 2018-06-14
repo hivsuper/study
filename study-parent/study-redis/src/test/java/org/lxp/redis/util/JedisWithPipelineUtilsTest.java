@@ -11,20 +11,24 @@ import org.junit.Test;
 
 public class JedisWithPipelineUtilsTest {
     private final String key = "test_pipeline_sorted_set";
+    private JedisUtils jedisUtils;
+    private JedisWithPipelineUtils jedisWithPipelineUtils;
 
     @Before
     public void setUp() {
-        JedisWithPipelineUtils.del(key);
+        jedisUtils = new JedisUtils();
+        jedisWithPipelineUtils = new JedisWithPipelineUtils(jedisUtils);
+        jedisWithPipelineUtils.del(key);
     }
 
     @Test
     public void doTest() throws Exception {
         List<String> list = Arrays.asList("1", "2");
         for (String s : list) {
-            Assert.assertEquals(1, JedisWithPipelineUtils.zadd(key, 1, s));
+            Assert.assertEquals(1, jedisWithPipelineUtils.zadd(key, 1, s));
         }
-        Assert.assertEquals("[1, 2]", JedisWithPipelineUtils.zrange(key, 0, list.size() * 2).toString());
-        Assert.assertEquals(2, JedisWithPipelineUtils.zrem(key, list));
+        Assert.assertEquals("[1, 2]", jedisWithPipelineUtils.zrange(key, 0, list.size() * 2).toString());
+        Assert.assertEquals(2, jedisWithPipelineUtils.zrem(key, list));
     }
 
     @Test
@@ -32,10 +36,10 @@ public class JedisWithPipelineUtilsTest {
         List<String> list = Arrays.asList("1", "2");
         int size = list.size() * 2;
         for (String s : list) {
-            Assert.assertEquals(1, JedisWithPipelineUtils.zadd(key, 1, s));
+            Assert.assertEquals(1, jedisWithPipelineUtils.zadd(key, 1, s));
         }
-        Assert.assertEquals("[1, 2]", JedisWithPipelineUtils.zpop(key, size).toString());
-        Assert.assertTrue(JedisWithPipelineUtils.zrange(key, 0, size).isEmpty());
+        Assert.assertEquals("[1, 2]", jedisWithPipelineUtils.zpop(key, size).toString());
+        Assert.assertTrue(jedisWithPipelineUtils.zrange(key, 0, size).isEmpty());
     }
 
     @Test
@@ -48,11 +52,11 @@ public class JedisWithPipelineUtilsTest {
         }
         // round 1
         long startTime1 = System.currentTimeMillis();
-        JedisWithPipelineUtils.zadd(key, values);
+        jedisWithPipelineUtils.zadd(key, values);
         long costTime1 = System.currentTimeMillis() - startTime1;
         // round 2
         long startTime2 = System.currentTimeMillis();
-        JedisUtils.zadd(key, values);
+        jedisUtils.zadd(key, values);
         long costTime2 = System.currentTimeMillis() - startTime2;
         // verify
         System.out.println("costTime1:" + costTime1 + ", costTime2:" + costTime2);

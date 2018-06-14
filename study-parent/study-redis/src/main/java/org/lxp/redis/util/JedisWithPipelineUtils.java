@@ -1,7 +1,5 @@
 package org.lxp.redis.util;
 
-import static org.lxp.redis.util.JedisUtils.getResource;
-
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -17,10 +15,15 @@ import redis.clients.jedis.Response;
 
 public class JedisWithPipelineUtils {
     private static final Logger LOG = LoggerFactory.getLogger(JedisWithPipelineUtils.class);
+    private JedisUtils jedisUtils;
 
-    public static long zadd(String key, double score, String value) {
+    public JedisWithPipelineUtils(JedisUtils jedisUtils) {
+        this.jedisUtils = jedisUtils;
+    }
+
+    public long zadd(String key, double score, String value) {
         long rtn = 0;
-        try (Jedis jedis = getResource(); Pipeline pipeline = jedis.pipelined()) {
+        try (Jedis jedis = jedisUtils.getResource(); Pipeline pipeline = jedis.pipelined()) {
             Response<Long> response = pipeline.zadd(key, score, value);
             pipeline.sync();
             rtn = response.get();
@@ -36,8 +39,8 @@ public class JedisWithPipelineUtils {
      * @param key
      * @param values
      */
-    public static void zadd(String key, Map<String, Double> values) {
-        try (Jedis jedis = getResource(); Pipeline pipeline = jedis.pipelined()) {
+    public void zadd(String key, Map<String, Double> values) {
+        try (Jedis jedis = jedisUtils.getResource(); Pipeline pipeline = jedis.pipelined()) {
             for (Entry<String, Double> entry : values.entrySet()) {
                 pipeline.zadd(key, entry.getValue(), entry.getKey());
             }
@@ -47,9 +50,9 @@ public class JedisWithPipelineUtils {
         }
     }
 
-    public static Set<String> zrange(String key, int start, int end) {
+    public Set<String> zrange(String key, int start, int end) {
         Set<String> rtn = Collections.emptySet();
-        try (Jedis jedis = getResource(); Pipeline pipeline = jedis.pipelined()) {
+        try (Jedis jedis = jedisUtils.getResource(); Pipeline pipeline = jedis.pipelined()) {
             Response<Set<String>> response = pipeline.zrange(key, start, end);
             pipeline.sync();
             rtn = response.get();
@@ -59,9 +62,9 @@ public class JedisWithPipelineUtils {
         return rtn;
     }
 
-    public static long zrem(String key, List<String> values) {
+    public long zrem(String key, List<String> values) {
         long rtn = 0;
-        try (Jedis jedis = getResource(); Pipeline pipeline = jedis.pipelined()) {
+        try (Jedis jedis = jedisUtils.getResource(); Pipeline pipeline = jedis.pipelined()) {
             Response<Long> response = pipeline.zrem(key, values.toArray(new String[values.size()]));
             pipeline.sync();
             rtn = response.get();
@@ -79,9 +82,9 @@ public class JedisWithPipelineUtils {
      * @param end
      * @return
      */
-    public static Set<String> zpop(String key, int offset) {
+    public Set<String> zpop(String key, int offset) {
         Set<String> rtn = Collections.emptySet();
-        try (Jedis jedis = getResource(); Pipeline pipeline = jedis.pipelined()) {
+        try (Jedis jedis = jedisUtils.getResource(); Pipeline pipeline = jedis.pipelined()) {
             Response<Set<String>> setResponse = pipeline.zrange(key, 0, offset);
             pipeline.sync();
             rtn = setResponse.get();
@@ -95,9 +98,9 @@ public class JedisWithPipelineUtils {
         return rtn;
     }
 
-    public static long del(String key) {
+    public long del(String key) {
         long rtn = 0;
-        try (Jedis jedis = getResource(); Pipeline pipeline = jedis.pipelined()) {
+        try (Jedis jedis = jedisUtils.getResource(); Pipeline pipeline = jedis.pipelined()) {
             Response<Long> response = pipeline.del(key);
             pipeline.sync();
             rtn = response.get();

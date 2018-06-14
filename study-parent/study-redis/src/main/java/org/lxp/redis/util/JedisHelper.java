@@ -1,19 +1,28 @@
 package org.lxp.redis.util;
 
-import static org.lxp.redis.util.JedisUtils.POOL;
-
+import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPubSub;
 
 public class JedisHelper {
-    public static void subscribe(JedisPubSub jedisPubSub, String channel) {
-        jedisPubSub.proceed(POOL.getResource().getClient(), channel);
+    private JedisUtils jedisUtils;
+
+    public JedisHelper(JedisUtils jedisUtils) {
+        this.jedisUtils = jedisUtils;
     }
 
-    public static void unsubscribe(JedisPubSub jedisPubSub, String channel) {
+    public void subscribe(JedisPubSub jedisPubSub, String channel) {
+        try (Jedis jedis = jedisUtils.getResource()) {
+            jedisPubSub.proceed(jedis.getClient(), channel);
+        }
+    }
+
+    public void unsubscribe(JedisPubSub jedisPubSub, String channel) {
         jedisPubSub.unsubscribe(channel);
     }
 
-    public static void publishMsg(String channel, String message) {
-        POOL.getResource().publish(channel, message);
+    public void publishMsg(String channel, String message) {
+        try (Jedis jedis = jedisUtils.getResource()) {
+            jedis.publish(channel, message);
+        }
     }
 }

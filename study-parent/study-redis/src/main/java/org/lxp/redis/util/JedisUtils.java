@@ -13,16 +13,20 @@ import redis.clients.jedis.JedisPubSub;
 
 public class JedisUtils {
     private static final Logger LOG = LoggerFactory.getLogger(JedisUtils.class);
+    private final JedisPool jedisPool;
     static final String PASSWORD = "123456";
     static final int PORT = 6379;
-    static final String HOST = "10.86.16.33";
-    static final JedisPool POOL;
+    static final String HOST = "10.86.17.154";
 
-    static {
+    public JedisUtils() {
         JedisPoolConfig config = new JedisPoolConfig();// Jedis池配置
         config.setMaxIdle(1000 * 60);// 对象最大空闲时间
         config.setTestOnBorrow(true);
-        POOL = new JedisPool(config, HOST, PORT, 0, PASSWORD);
+        jedisPool = new JedisPool(config, HOST, PORT, 0, PASSWORD);
+    }
+
+    JedisUtils(JedisPool pool) {
+        jedisPool = pool;
     }
 
     /**
@@ -31,7 +35,7 @@ public class JedisUtils {
      * @param channel
      * @param message
      */
-    public static void publishMsg(String channel, String message) {
+    public void publishMsg(String channel, String message) {
         try (Jedis jedis = getResource()) {
             jedis.publish(channel, message);
             LOG.debug("publishMsg {} = {}", channel, message);
@@ -46,7 +50,7 @@ public class JedisUtils {
      * @param channel
      * @param message
      */
-    public static void publishMsg(byte[] channel, byte[] message) {
+    public void publishMsg(byte[] channel, byte[] message) {
         try (Jedis jedis = getResource()) {
             jedis.publish(channel, message);
             LOG.debug("publishMsg {} = {}", channel, message);
@@ -61,7 +65,7 @@ public class JedisUtils {
      * @param jedisPubSub
      * @param channels
      */
-    public static void subscribeMsg(JedisPubSub jedisPubSub, String... channels) {
+    public void subscribeMsg(JedisPubSub jedisPubSub, String... channels) {
         try (Jedis jedis = getResource()) {
             jedis.subscribe(jedisPubSub, channels);
             LOG.debug("subscribeMsg {} = {}", jedisPubSub, channels);
@@ -76,7 +80,7 @@ public class JedisUtils {
      * @param key
      * @param values
      */
-    public static void zadd(String key, Map<String, Double> values) {
+    public void zadd(String key, Map<String, Double> values) {
         try (Jedis jedis = getResource()) {
             for (Entry<String, Double> entry : values.entrySet()) {
                 jedis.zadd(key, entry.getValue(), entry.getKey());
@@ -86,7 +90,7 @@ public class JedisUtils {
         }
     }
 
-    static Jedis getResource() {
-        return POOL.getResource();
+    public Jedis getResource() {
+        return jedisPool.getResource();
     }
 }
