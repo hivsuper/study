@@ -16,15 +16,15 @@ import redis.clients.jedis.JedisPubSub;
 public class JedisUtils {
     private static final Logger LOG = LoggerFactory.getLogger(JedisUtils.class);
     private final JedisPool jedisPool;
-    static final String PASSWORD = "123456";
-    static final int PORT = 6379;
-    static final String HOST = "10.86.17.154";
+    private final String password = "123456";
+    private final int port = 6379;
+    private final String host = "10.86.17.154";
 
     public JedisUtils() {
         JedisPoolConfig config = new JedisPoolConfig();// Jedis池配置
         config.setMaxIdle(1000 * 60);// 对象最大空闲时间
         config.setTestOnBorrow(true);
-        jedisPool = new JedisPool(config, HOST, PORT, 0, PASSWORD);
+        jedisPool = new JedisPool(config, host, port, 0, password);
     }
 
     JedisUtils(JedisPool pool) {
