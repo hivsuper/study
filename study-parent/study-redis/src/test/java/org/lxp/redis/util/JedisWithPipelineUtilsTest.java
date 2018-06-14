@@ -87,4 +87,19 @@ public class JedisWithPipelineUtilsTest {
         // execute and verify
         Assert.assertThat(jedisWithPipelineUtils.del(key), Matchers.is(1L));
     }
+
+    @Test
+    public void testBatch() throws Exception {
+        Map<String, String> map = new HashMap<>();
+        map.put("batch_1", "1");
+        map.put("batch_2", "2");
+        map.put("batch_3", "3");
+        map.put("batch_4", "4");
+        Assert.assertEquals("{batch_2=OK, batch_1=OK, batch_4=OK, batch_3=OK}",
+                jedisWithPipelineUtils.setBatch(map).toString());
+        Assert.assertEquals("{batch_2=2, batch_1=1, batch_4=4, batch_3=3}",
+                jedisWithPipelineUtils.getBatch(map.keySet()).toString());
+        Assert.assertEquals("{batch_2=1, batch_1=1, batch_4=1, batch_3=1}",
+                jedisWithPipelineUtils.delBatch(map.keySet()).toString());
+    }
 }

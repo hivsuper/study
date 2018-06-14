@@ -1,6 +1,7 @@
 package org.lxp.redis.util;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -94,6 +95,57 @@ public class JedisWithPipelineUtils {
             }
         } catch (Exception e) {
             LOG.error(e.getMessage(), e);
+        }
+        return rtn;
+    }
+
+    public Map<String, String> setBatch(Map<String, String> setMap) {
+        Map<String, Response<String>> map = new HashMap<>();
+        try (Jedis jedis = jedisUtils.getResource(); Pipeline pipeline = jedis.pipelined()) {
+            for (Entry<String, String> entry : setMap.entrySet()) {
+                map.put(entry.getKey(), pipeline.set(entry.getKey(), entry.getValue()));
+            }
+            pipeline.sync();
+        } catch (Exception e) {
+            LOG.error(e.getMessage(), e);
+        }
+        Map<String, String> rtn = new HashMap<>();
+        for (Entry<String, Response<String>> entry : map.entrySet()) {
+            rtn.put(entry.getKey(), entry.getValue().get());
+        }
+        return rtn;
+    }
+
+    public Map<String, String> getBatch(Set<String> keys) {
+        Map<String, Response<String>> map = new HashMap<>();
+        try (Jedis jedis = jedisUtils.getResource(); Pipeline pipeline = jedis.pipelined()) {
+            for (String key : keys) {
+                map.put(key, pipeline.get(key));
+            }
+            pipeline.sync();
+        } catch (Exception e) {
+            LOG.error(e.getMessage(), e);
+        }
+        Map<String, String> rtn = new HashMap<>();
+        for (Entry<String, Response<String>> entry : map.entrySet()) {
+            rtn.put(entry.getKey(), entry.getValue().get());
+        }
+        return rtn;
+    }
+
+    public Map<String, Long> delBatch(Set<String> keys) {
+        Map<String, Response<Long>> map = new HashMap<>();
+        try (Jedis jedis = jedisUtils.getResource(); Pipeline pipeline = jedis.pipelined()) {
+            for (String key : keys) {
+                map.put(key, pipeline.del(key));
+            }
+            pipeline.sync();
+        } catch (Exception e) {
+            LOG.error(e.getMessage(), e);
+        }
+        Map<String, Long> rtn = new HashMap<>();
+        for (Entry<String, Response<Long>> entry : map.entrySet()) {
+            rtn.put(entry.getKey(), entry.getValue().get());
         }
         return rtn;
     }
