@@ -1,7 +1,9 @@
 package org.lxp.redis.util;
 
+import java.util.Collections;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -88,6 +90,36 @@ public class JedisUtils {
         } catch (Exception e) {
             LOG.error(e.getMessage(), e);
         }
+    }
+
+    public String set(String key, String value) {
+        String rtn = null;
+        try (Jedis jedis = getResource()) {
+            rtn = jedis.set(key, value);
+        } catch (Exception e) {
+            LOG.error(e.getMessage(), e);
+        }
+        return rtn;
+    }
+
+    public String get(String key) {
+        String rtn = null;
+        try (Jedis jedis = getResource()) {
+            rtn = jedis.get(key);
+        } catch (Exception e) {
+            LOG.error(e.getMessage(), e);
+        }
+        return rtn;
+    }
+
+    public Set<String> zrange(String key, int start, int end) {
+        Set<String> rtn = Collections.emptySet();
+        try (Jedis jedis = getResource()) {
+            rtn = jedis.zrange(key, start, end);
+        } catch (Exception e) {
+            LOG.error(e.getMessage(), e);
+        }
+        return rtn;
     }
 
     public Jedis getResource() {
