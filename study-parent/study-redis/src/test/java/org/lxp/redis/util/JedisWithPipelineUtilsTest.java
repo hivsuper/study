@@ -1,13 +1,22 @@
 package org.lxp.redis.util;
 
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
+
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.hamcrest.Matchers;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
+import redis.clients.jedis.BuilderFactory;
+import redis.clients.jedis.Jedis;
+import redis.clients.jedis.Pipeline;
+import redis.clients.jedis.Response;
 
 public class JedisWithPipelineUtilsTest {
     private final String key = "test_pipeline_sorted_set";
@@ -61,5 +70,21 @@ public class JedisWithPipelineUtilsTest {
         // verify
         System.out.println("costTime1:" + costTime1 + ", costTime2:" + costTime2);
         Assert.assertTrue(costTime2 > costTime1);
+    }
+
+    @Test
+    public void testDel() throws Exception {
+        // given
+        jedisUtils = mock(JedisUtils.class);
+        jedisWithPipelineUtils = new JedisWithPipelineUtils(jedisUtils);
+        Jedis jedis = mock(Jedis.class);
+        Pipeline pipeline = mock(Pipeline.class);
+        doReturn(jedis).when(jedisUtils).getResource();
+        doReturn(pipeline).when(jedis).pipelined();
+        Response<Long> response = new Response<>(BuilderFactory.LONG);
+        response.set(1L);
+        doReturn(response).when(pipeline).del(key);
+        // execute and verify
+        Assert.assertThat(jedisWithPipelineUtils.del(key), Matchers.is(1L));
     }
 }
