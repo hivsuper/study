@@ -20,8 +20,7 @@ public class JedisWithPipelineUtils {
 
     public static long zadd(String key, double score, String value) {
         long rtn = 0;
-        try (Jedis jedis = getResource()) {
-            Pipeline pipeline = jedis.pipelined();
+        try (Jedis jedis = getResource(); Pipeline pipeline = jedis.pipelined()) {
             Response<Long> response = pipeline.zadd(key, score, value);
             pipeline.sync();
             rtn = response.get();
@@ -38,8 +37,7 @@ public class JedisWithPipelineUtils {
      * @param values
      */
     public static void zadd(String key, Map<String, Double> values) {
-        try (Jedis jedis = getResource()) {
-            Pipeline pipeline = jedis.pipelined();
+        try (Jedis jedis = getResource(); Pipeline pipeline = jedis.pipelined()) {
             for (Entry<String, Double> entry : values.entrySet()) {
                 pipeline.zadd(key, entry.getValue(), entry.getKey());
             }
@@ -51,8 +49,7 @@ public class JedisWithPipelineUtils {
 
     public static Set<String> zrange(String key, int start, int end) {
         Set<String> rtn = Collections.emptySet();
-        try (Jedis jedis = getResource()) {
-            Pipeline pipeline = jedis.pipelined();
+        try (Jedis jedis = getResource(); Pipeline pipeline = jedis.pipelined()) {
             Response<Set<String>> response = pipeline.zrange(key, start, end);
             pipeline.sync();
             rtn = response.get();
@@ -64,8 +61,7 @@ public class JedisWithPipelineUtils {
 
     public static long zrem(String key, List<String> values) {
         long rtn = 0;
-        try (Jedis jedis = getResource()) {
-            Pipeline pipeline = jedis.pipelined();
+        try (Jedis jedis = getResource(); Pipeline pipeline = jedis.pipelined()) {
             Response<Long> response = pipeline.zrem(key, values.toArray(new String[values.size()]));
             pipeline.sync();
             rtn = response.get();
@@ -85,8 +81,7 @@ public class JedisWithPipelineUtils {
      */
     public static Set<String> zpop(String key, int offset) {
         Set<String> rtn = Collections.emptySet();
-        try (Jedis jedis = getResource()) {
-            Pipeline pipeline = jedis.pipelined();
+        try (Jedis jedis = getResource(); Pipeline pipeline = jedis.pipelined()) {
             Response<Set<String>> setResponse = pipeline.zrange(key, 0, offset);
             pipeline.sync();
             rtn = setResponse.get();
@@ -102,8 +97,7 @@ public class JedisWithPipelineUtils {
 
     public static long del(String key) {
         long rtn = 0;
-        try (Jedis jedis = getResource()) {
-            Pipeline pipeline = jedis.pipelined();
+        try (Jedis jedis = getResource(); Pipeline pipeline = jedis.pipelined()) {
             Response<Long> response = pipeline.del(key);
             pipeline.sync();
             rtn = response.get();
