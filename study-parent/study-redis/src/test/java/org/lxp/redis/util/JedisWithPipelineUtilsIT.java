@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -18,6 +19,10 @@ public class JedisWithPipelineUtilsIT {
     public void setUp() {
         jedisUtils = new JedisUtils();
         jedisWithPipelineUtils = new JedisWithPipelineUtils(jedisUtils);
+    }
+
+    @After
+    public void tearDown() {
         jedisWithPipelineUtils.del(key);
     }
 
