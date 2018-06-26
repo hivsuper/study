@@ -15,9 +15,7 @@ import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
 /**
- * Powermock 1.7.3 incompatible with Mockito > 2.8.47
- * 
- * @see https://github.com/powermock/powermock/issues/867
+ * @see https://blog.csdn.net/lqadam/article/details/78939161
  */
 @RunWith(PowerMockRunner.class)
 @PrepareForTest({ PowerMockHelper.class })
