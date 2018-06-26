@@ -8,3 +8,5 @@ java-notes/target/
 java-notes/.settings/
 .settings/
 target/
+.idea/
+*.iml

@@ -3,7 +3,7 @@ package org.lxp.mock.captor;
 import java.util.List;
 
 public interface CaptorService {
-    public void execute(List<CaptorModel> models);
+    void execute(List<CaptorModel> models);
 
-    public String execute(CaptorModel model);
+    String execute(CaptorModel model);
 }

@@ -1,8 +1,5 @@
 package org.lxp.powermock.impl;
 
-import static org.lxp.powermock.PowerMockIgnoreHelper.POWER_MOCK_IGNORE_MANAGEMENT;
-import static org.lxp.powermock.PowerMockIgnoreHelper.POWER_MOCK_IGNORE_SSL;
-
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -14,22 +11,25 @@ import org.powermock.core.classloader.annotations.PowerMockIgnore;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
+import static org.lxp.powermock.PowerMockIgnoreHelper.POWER_MOCK_IGNORE_MANAGEMENT;
+import static org.lxp.powermock.PowerMockIgnoreHelper.POWER_MOCK_IGNORE_SSL;
+
 /**
- * @see https://blog.csdn.net/lqadam/article/details/78939161
+ * https://blog.csdn.net/lqadam/article/details/78939161
  */
 @RunWith(PowerMockRunner.class)
-@PrepareForTest({ PowerMockHelper.class })
-@PowerMockIgnore({ POWER_MOCK_IGNORE_MANAGEMENT, POWER_MOCK_IGNORE_SSL })
+@PrepareForTest({PowerMockHelper.class})
+@PowerMockIgnore({POWER_MOCK_IGNORE_MANAGEMENT, POWER_MOCK_IGNORE_SSL})
 public class RealPowerMockServiceImplTest {
     private RealPowerMockService realPowerMockService;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         realPowerMockService = new RealPowerMockServiceImpl();
     }
 
     @Test
-    public void testExecute() throws Exception {
+    public void testExecute() {
         Assert.assertEquals("Super Liaa", realPowerMockService.execute("aa"));
 
         PowerMockito.mockStatic(PowerMockHelper.class);

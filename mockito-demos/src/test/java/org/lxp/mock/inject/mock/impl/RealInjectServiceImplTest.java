@@ -6,7 +6,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.lxp.mock.inject.mock.InjectService;
 import org.lxp.mock.inject.mock.RealInjectService;
-import org.lxp.mock.inject.mock.impl.RealInjectServiceImpl;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -21,13 +20,13 @@ public class RealInjectServiceImplTest {
     private RealInjectService realService = new RealInjectServiceImpl();
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         MockitoAnnotations.initMocks(this);
         Mockito.when(injectService.getName()).thenReturn("Super Li");
     }
 
     @Test
-    public void testGetName() throws Exception {
+    public void testGetName() {
         Assert.assertEquals("Real Name is Super Li", realService.getName());
     }
 

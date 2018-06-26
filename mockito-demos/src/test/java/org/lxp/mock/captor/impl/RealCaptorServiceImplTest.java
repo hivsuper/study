@@ -25,12 +25,12 @@ public class RealCaptorServiceImplTest {
     private RealCaptorService realCaptorService;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         realCaptorService = new RealCaptorServiceImpl(captorService);
     }
 
     @Test
-    public void argumentCaptor() throws Exception {
+    public void argumentCaptor() {
         Mockito.doNothing().when(captorService).execute(argumentCaptor.capture());
         String propertyString = "propertyString";
         int propertyInt = 1;
@@ -40,14 +40,14 @@ public class RealCaptorServiceImplTest {
     }
 
     @Test
-    public void verifyAndAny() throws Exception {
+    public void verifyAndAny() {
         Mockito.doReturn("success").when(captorService).execute(Mockito.any(CaptorModel.class));
         realCaptorService.execute("propertyString", 1);
         Mockito.verify(captorService, Mockito.times(1)).execute(Mockito.any(CaptorModel.class));
     }
 
     @Test
-    public void verifyAndEq() throws Exception {
+    public void verifyAndEq() {
         CaptorModel captorModel = new CaptorModel("propertyString", 1);
         Mockito.when(captorService.execute(captorModel)).thenReturn("lalala");
         realCaptorService.execute(captorModel);
@@ -62,7 +62,7 @@ public class RealCaptorServiceImplTest {
     }
 
     @Test
-    public void returnDifferentValueInMultiCalls() throws Exception {
+    public void returnDifferentValueInMultiCalls() {
         Mockito.doReturn("1", "a", "b").when(captorService).execute(Mockito.any(CaptorModel.class));
         List<String> rtn = realCaptorService.execute(4);
         Mockito.verify(captorService, Mockito.times(3)).execute(Mockito.any(CaptorModel.class));
@@ -70,7 +70,7 @@ public class RealCaptorServiceImplTest {
     }
 
     @Test
-    public void spy() throws Exception {
+    public void spy() {
         // 测试模拟
         RealCaptorService spy = Mockito.spy(new RealCaptorServiceImpl(captorService));
         Mockito.doReturn(Collections.singletonList("1")).when(spy).execute(Mockito.eq(4));
