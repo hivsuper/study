@@ -7,7 +7,9 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import org.awaitility.Awaitility;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.lxp.mock.captor.CaptorModel;
 import org.lxp.mock.captor.CaptorService;
@@ -20,6 +22,8 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 @RunWith(MockitoJUnitRunner.class)
 public class RealCaptorServiceImplTest {
+    @Rule
+    public ExpectedException expectedException = ExpectedException.none();
     @Mock
     private CaptorService captorService;
     @Captor
@@ -60,6 +64,15 @@ public class RealCaptorServiceImplTest {
     public void doThrow() {
         CaptorModel captorModel = new CaptorModel("propertyString", 1);
         Mockito.doThrow(new IllegalArgumentException("s")).when(captorService).execute(captorModel);
+        realCaptorService.execute(captorModel);
+    }
+
+    @Test
+    public void doThrowRule() {
+        CaptorModel captorModel = new CaptorModel("propertyString", 1);
+        Mockito.doThrow(new IllegalArgumentException("s")).when(captorService).execute(captorModel);
+        expectedException.expect(IllegalArgumentException.class);
+        expectedException.expectMessage("s");
         realCaptorService.execute(captorModel);
     }
 
