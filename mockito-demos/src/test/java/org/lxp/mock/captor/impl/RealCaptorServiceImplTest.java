@@ -2,7 +2,9 @@ package org.lxp.mock.captor.impl;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 
+import org.awaitility.Awaitility;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -59,6 +61,19 @@ public class RealCaptorServiceImplTest {
         CaptorModel captorModel = new CaptorModel("propertyString", 1);
         Mockito.doThrow(new IllegalArgumentException("s")).when(captorService).execute(captorModel);
         realCaptorService.execute(captorModel);
+    }
+
+    @Test
+    public void doAnswer() {
+        AtomicBoolean running = new AtomicBoolean(false);
+        CaptorModel captorModel = new CaptorModel("propertyString", 1);
+        Mockito.doAnswer(a -> {
+            running.set(true);
+            return Collections.emptyList();
+        }).when(captorService).execute(captorModel);
+        realCaptorService.asyncExecute(captorModel);
+        Awaitility.await().untilTrue(running);
+        Mockito.verify(captorService).execute(Mockito.eq(captorModel));
     }
 
     @Test

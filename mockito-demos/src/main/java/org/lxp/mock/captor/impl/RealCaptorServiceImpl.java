@@ -1,13 +1,14 @@
 package org.lxp.mock.captor.impl;
 
-import org.lxp.mock.captor.CaptorModel;
-import org.lxp.mock.captor.CaptorService;
-import org.lxp.mock.captor.RealCaptorService;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.Executors;
 import java.util.stream.IntStream;
+
+import org.lxp.mock.captor.CaptorModel;
+import org.lxp.mock.captor.CaptorService;
+import org.lxp.mock.captor.RealCaptorService;
 
 public class RealCaptorServiceImpl implements RealCaptorService {
     private CaptorService captorService;
@@ -32,9 +33,15 @@ public class RealCaptorServiceImpl implements RealCaptorService {
     }
 
     @Override
+    public void asyncExecute(CaptorModel captorModel) {
+        Executors.newSingleThreadExecutor().submit(() -> captorService.execute(captorModel));
+    }
+
+    @Override
     public List<String> execute(int index) {
         List<String> rtn = new ArrayList<>(index);
-        IntStream.range(1, index).forEach(value -> rtn.add(captorService.execute(new CaptorModel(String.valueOf(value), value))));
+        IntStream.range(1, index)
+                .forEach(value -> rtn.add(captorService.execute(new CaptorModel(String.valueOf(value), value))));
         return rtn;
     }
 }

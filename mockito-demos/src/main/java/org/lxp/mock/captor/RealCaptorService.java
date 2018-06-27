@@ -9,5 +9,7 @@ public interface RealCaptorService {
 
     void execute(CaptorModel captorModel);
 
+    void asyncExecute(CaptorModel captorModel);
+
     List<String> execute(int index);
 }
