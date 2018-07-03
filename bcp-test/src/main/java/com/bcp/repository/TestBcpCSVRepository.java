@@ -30,8 +30,7 @@ public class TestBcpCSVRepository extends TestRepository {
             // ISQLServerBulkRecord.
             // Here we are using the SQLServerBulkCSVFileRecord implementation to import the
             // example CSV file.
-            fileRecord = new SQLServerBulkCSVFileRecord("C:\\Users\\sli25\\Desktop\\DOPC-8876\\TestBulkCSVExample.csv",
-                    null, "\\|", false);
+            fileRecord = new SQLServerBulkCSVFileRecord("C:\\TestBulkCSVExample.csv", null, "\\|", false);
 
             // Set the metadata for each column to be copied.
             fileRecord.addColumnMetadata(1, null, java.sql.Types.NVARCHAR, 0, 0);
