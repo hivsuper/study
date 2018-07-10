@@ -1,0 +1,29 @@
+<html>
+<head>
+<title>Test</title>
+</head>
+<body>
+<input type="file" name="file">
+<script src="js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	$('[name=file]').on('change', function(){
+		var formData = new FormData();
+		formData.append('file', $(this)[0].files[0]);
+		formData.append("url", 'https://stackoverflow.com');
+		$.ajax({
+			url : "/fileAndUrl",
+			type : 'POST',
+			processData: false,
+			contentType: false,
+			data : formData,           
+			success : function(response) { 
+				console.log(response);
+			},
+			error: function (xhr) { }
+		});
+	})
+});
+</script>
+</body>
+</html>
