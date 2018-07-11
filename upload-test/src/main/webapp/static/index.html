@@ -3,16 +3,29 @@
 <title>Test</title>
 </head>
 <body>
-<input type="file" name="file">
+<input type="file" name="file" multiple="multiple" accept=".pdf" />
+<input type="button" value="upload single files" id="single-upload" />
+<input type="button" value="upload multiple files" id="multiple-upload" />
 <script src="js/jquery-3.3.1.min.js"></script>
 <script type="text/javascript">
 $(function(){
-	$('[name=file]').on('change', function(){
+	$('#single-upload').on('click', function(){
 		var formData = new FormData();
-		formData.append('file', $(this)[0].files[0]);
-		formData.append("url", 'https://stackoverflow.com');
+		formData.append('file', $('[name=file]')[0].files[0]);
+		formData.append('name', '1.pdf');
+		doUpload("/fileAndUrl", formData);
+	})
+	$('#multiple-upload').on('click', function(){
+		var formData = new FormData();
+		$.each($('[name=file]')[0].files, function(i, file) {
+			formData.append('files', file);
+		});
+		doUpload("/uploadMultipleFiles", formData);
+	})
+	function doUpload(url, formData) {
+		console.log(formData);
 		$.ajax({
-			url : "/fileAndUrl",
+			url : url,
 			type : 'POST',
 			processData: false,
 			contentType: false,
@@ -22,7 +35,7 @@ $(function(){
 			},
 			error: function (xhr) { }
 		});
-	})
+	}
 });
 </script>
 </body>
