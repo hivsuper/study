@@ -1,9 +1,6 @@
 # bcp-test
 [Using Bulk Copy with the JDBC Driver](https://docs.microsoft.com/en-us/sql/connect/jdbc/using-bulk-copy-with-the-jdbc-driver?view=sql-server-2017)
 
-# study
-All experimental projects  
-
 ## design-pattern
 +	Demos for design pattern  
 
@@ -44,3 +41,6 @@ All experimental projects
 	<tr><td>rw-splitting</td><td>test read/write splitting approach</td></tr>
 	<tr><td>study-redis</td><td>test publish/subscribe base on redis</td></tr>
 </table>
+
+## upload-test
++	Test upload files base on SpringMVC + ajax
