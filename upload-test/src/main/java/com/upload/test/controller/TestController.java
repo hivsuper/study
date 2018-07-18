@@ -40,9 +40,8 @@ public class TestController {
     }
 
     @GetMapping("/crawler-test")
-    public ResponseEntity<Void> testCrawler(@RequestParam String query) throws InterruptedException {
-        System.err.println(query);
-        Thread.sleep(1000L);
+    public ResponseEntity<Void> testCrawler(@RequestParam long sleep) throws InterruptedException {
+        Thread.sleep(sleep);
         return ResponseEntity.ok().build();
     }
 }

@@ -27,6 +27,7 @@ public class CloseableHttpAsyncClientHelper extends AbstractHttpClientHelper {
         IOReactorConfig ioReactorConfig = IOReactorConfig.custom()
                 .setIoThreadCount(Runtime.getRuntime().availableProcessors()).setSoKeepAlive(true).build();
         ConnectingIOReactor ioReactor = new DefaultConnectingIOReactor(ioReactorConfig);
+
         connManager = new PoolingNHttpClientConnectionManager(ioReactor);
         connManager.setMaxTotal(maxTotalConnection);
         connManager.setDefaultMaxPerRoute(maxTotalConnection);
@@ -35,7 +36,7 @@ public class CloseableHttpAsyncClientHelper extends AbstractHttpClientHelper {
     @Override
     public List<Integer> batchGet(List<String> urls) throws IOException {
         try (CloseableHttpAsyncClient httpclient = HttpAsyncClients.custom().setConnectionManager(connManager)
-                .build()) {
+                .setDefaultRequestConfig(requestConfig).build()) {
             httpclient.start();
 
             List<Future<HttpResponse>> respList = urls.stream().map(url -> {
@@ -51,6 +52,19 @@ public class CloseableHttpAsyncClientHelper extends AbstractHttpClientHelper {
                     return null;
                 }
             }).collect(Collectors.toList());
+        }
+    }
+
+    @Override
+    public Integer get(String url) throws Exception {
+        try (CloseableHttpAsyncClient httpclient = HttpAsyncClients.custom().setConnectionManager(connManager)
+                .setDefaultRequestConfig(requestConfig).build()) {
+            httpclient.start();
+
+            final HttpGet request = buildGet(url);
+            Future<HttpResponse> response = httpclient.execute(request, null);
+
+            return response.get().getStatusLine().getStatusCode();
         }
     }
 }

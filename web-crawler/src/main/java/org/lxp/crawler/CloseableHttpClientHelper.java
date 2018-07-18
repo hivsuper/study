@@ -24,7 +24,8 @@ public class CloseableHttpClientHelper extends AbstractHttpClientHelper {
 
     @Override
     public List<Integer> batchGet(List<String> urls) throws IOException {
-        try (CloseableHttpClient httpclient = HttpClients.custom().setConnectionManager(connManager).build()) {
+        try (CloseableHttpClient httpclient = HttpClients.custom().setConnectionManager(connManager)
+                .setDefaultRequestConfig(requestConfig).build()) {
             return urls.stream().map(url -> {
                 final HttpGet request = buildGet(url);
                 try (CloseableHttpResponse response = httpclient.execute(request)) {
@@ -34,6 +35,17 @@ public class CloseableHttpClientHelper extends AbstractHttpClientHelper {
                     return null;
                 }
             }).collect(Collectors.toList());
+        }
+    }
+
+    @Override
+    public Integer get(String url) throws IOException {
+        try (CloseableHttpClient httpclient = HttpClients.custom().setConnectionManager(connManager)
+                .setDefaultRequestConfig(requestConfig).build()) {
+            final HttpGet request = buildGet(url);
+            try (CloseableHttpResponse response = httpclient.execute(request)) {
+                return response.getStatusLine().getStatusCode();
+            }
         }
     }
 }
