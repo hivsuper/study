@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.concurrent.FutureCallback;
 import org.apache.http.impl.nio.client.CloseableHttpAsyncClient;
 import org.apache.http.impl.nio.client.HttpAsyncClients;
 import org.apache.http.impl.nio.conn.PoolingNHttpClientConnectionManager;
@@ -41,7 +42,7 @@ public class CloseableHttpAsyncClientHelper extends AbstractHttpClientHelper {
 
             List<Future<HttpResponse>> respList = urls.stream().map(url -> {
                 final HttpGet request = buildGet(url);
-                return httpclient.execute(request, null);
+                return httpclient.execute(request, futureCallback);
             }).collect(Collectors.toCollection(LinkedList::new));
 
             return respList.stream().map(response -> {
@@ -62,9 +63,23 @@ public class CloseableHttpAsyncClientHelper extends AbstractHttpClientHelper {
             httpclient.start();
 
             final HttpGet request = buildGet(url);
-            Future<HttpResponse> response = httpclient.execute(request, null);
+            Future<HttpResponse> response = httpclient.execute(request, futureCallback);
 
             return response.get().getStatusLine().getStatusCode();
         }
     }
+
+    private FutureCallback<HttpResponse> futureCallback = new FutureCallback<HttpResponse>() {
+        public void completed(HttpResponse httpResponse) {
+            LOGGER.info("request complete");
+        }
+
+        public void failed(Exception e) {
+            LOGGER.error("request failed");
+        }
+
+        public void cancelled() {
+            LOGGER.info("request cancelled");
+        }
+    };
 }
