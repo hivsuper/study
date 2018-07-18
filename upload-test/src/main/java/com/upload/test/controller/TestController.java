@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.Arrays;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -35,6 +36,13 @@ public class TestController {
                 e.printStackTrace();
             }
         });
+        return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/crawler-test")
+    public ResponseEntity<Void> testCrawler(@RequestParam String query) throws InterruptedException {
+        System.err.println(query);
+        Thread.sleep(1000L);
         return ResponseEntity.ok().build();
     }
 }
