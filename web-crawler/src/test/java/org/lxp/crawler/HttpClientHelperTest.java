@@ -5,11 +5,16 @@ import static org.junit.Assert.assertTrue;
 import java.io.IOException;
 import java.net.SocketTimeoutException;
 import java.util.List;
+import java.util.Objects;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import org.apache.http.conn.ConnectionPoolTimeoutException;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -47,16 +52,36 @@ public class HttpClientHelperTest {
     }
 
     @Test
-    public void shouldThrowExceptionWhenAsyncTimeout() throws Exception {
+    public void shouldThrowExceptionWhenAsyncSocketTimeout() throws Exception {
         expectedException.expect(ExecutionException.class);
         helper = new CloseableHttpAsyncClientHelper();
-        helper.get(crawlerUrl.concat(String.valueOf(TimeUnit.SECONDS.toMillis(31))));
+        helper.get(crawlerUrl.concat(String.valueOf(TimeUnit.SECONDS.toMillis(61))));
     }
 
     @Test
-    public void shouldThrowExceptionWhenTimeout() throws Exception {
+    public void shouldThrowExceptionWhenSocketTimeout() throws Exception {
         expectedException.expect(SocketTimeoutException.class);
         helper = new CloseableHttpClientHelper();
-        helper.get(crawlerUrl.concat(String.valueOf(TimeUnit.SECONDS.toMillis(31))));
+        helper.get(crawlerUrl.concat(String.valueOf(TimeUnit.SECONDS.toMillis(61))));
+    }
+
+    @Test
+    public void shouldThrowExceptionWhenConnectTimeout() throws Exception {
+        expectedException.expect(IllegalStateException.class);
+        helper = new CloseableHttpClientHelper();
+        final int size = helper.maxTotalConnection;
+        final int time = 41;
+        ExecutorService executorService = Executors.newFixedThreadPool(size);
+        IntStream.range(0, size)
+                .mapToObj(index -> CompletableFuture.supplyAsync(() -> {
+                    Integer rtn = null;
+                    try {
+                        rtn = helper.get(crawlerUrl.concat(String.valueOf(TimeUnit.SECONDS.toMillis(time))));
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    return rtn;
+                }, executorService)).filter(Objects::nonNull).collect(Collectors.toList());
+        helper.get(crawlerUrl.concat(String.valueOf(TimeUnit.SECONDS.toMillis(time))));
     }
 }
