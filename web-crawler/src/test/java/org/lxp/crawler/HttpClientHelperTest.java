@@ -14,7 +14,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import org.apache.http.conn.ConnectionPoolTimeoutException;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
