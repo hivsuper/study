@@ -2,10 +2,12 @@ package org.lxp.java8;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -71,5 +73,29 @@ public class StudyLocalDateTime {
      */
     public static long differentDays(LocalDateTime localDateTime1, LocalDateTime localDateTime2) {
         return localDateTime1.toLocalDate().toEpochDay() - localDateTime2.toLocalDate().toEpochDay();
+    }
+
+    /**
+     * Days of localDateTime1-localDateTime2
+     * 
+     * @param localDateTime1
+     * @param localDateTime2
+     * @return
+     */
+    public static long differentDays2(LocalDateTime localDateTime1, LocalDateTime localDateTime2) {
+        return ChronoUnit.DAYS.between(localDateTime2.toLocalDate(), localDateTime1.toLocalDate());
+    }
+
+    /**
+     * Days of localDateTime1-localDateTime2
+     * 
+     * @param localDateTime1
+     * @param localDateTime2
+     * @return
+     */
+    public static long differentDays3(LocalDateTime localDateTime1, LocalDateTime localDateTime2) {
+        return Duration
+                .between(localDateTime2.toLocalDate().atStartOfDay(), localDateTime1.toLocalDate().atStartOfDay())
+                .toDays();
     }
 }
