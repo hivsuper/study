@@ -98,4 +98,15 @@ public class StudyLocalDateTime {
                 .between(localDateTime2.toLocalDate().atStartOfDay(), localDateTime1.toLocalDate().atStartOfDay())
                 .toDays();
     }
+
+    /**
+     * Days of localDateTime1-localDateTime2
+     * 
+     * @param localDateTime1
+     * @param localDateTime2
+     * @return
+     */
+    public static long differentDays4(LocalDateTime localDateTime1, LocalDateTime localDateTime2) {
+        return localDateTime2.toLocalDate().until(localDateTime1.toLocalDate(), ChronoUnit.DAYS);
+    }
 }

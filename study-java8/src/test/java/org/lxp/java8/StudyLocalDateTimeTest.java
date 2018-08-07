@@ -81,5 +81,9 @@ public class StudyLocalDateTimeTest {
         Assert.assertEquals(-1L, StudyLocalDateTime.differentDays3(localDateTime.minusSeconds(1), localDateTime));
         Assert.assertEquals(0L, StudyLocalDateTime.differentDays3(localDateTime.plusSeconds(1), localDateTime));
         Assert.assertEquals(30L, StudyLocalDateTime.differentDays3(localDateTime.plusMonths(1), localDateTime));
+
+        Assert.assertEquals(-1L, StudyLocalDateTime.differentDays4(localDateTime.minusSeconds(1), localDateTime));
+        Assert.assertEquals(0L, StudyLocalDateTime.differentDays4(localDateTime.plusSeconds(1), localDateTime));
+        Assert.assertEquals(30L, StudyLocalDateTime.differentDays4(localDateTime.plusMonths(1), localDateTime));
     }
 }
