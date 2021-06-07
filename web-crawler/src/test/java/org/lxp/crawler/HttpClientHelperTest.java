@@ -8,8 +8,6 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-import org.junit.runner.RunWith;
-import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.util.StopWatch;
 
 import java.io.IOException;
@@ -25,9 +23,8 @@ import java.util.stream.IntStream;
 import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
 import static com.github.tomakehurst.wiremock.client.WireMock.get;
 import static com.github.tomakehurst.wiremock.client.WireMock.urlEqualTo;
-import static org.junit.Assert.assertTrue;
+import static org.assertj.core.api.Assertions.assertThat;
 
-@RunWith(MockitoJUnitRunner.class)
 public class HttpClientHelperTest {
     @Rule
     public ExpectedException expectedException = ExpectedException.none();
@@ -69,8 +66,8 @@ public class HttpClientHelperTest {
         long costTimeBatch = stopWatch.getLastTaskTimeMillis();
 
         // verify
-        assertTrue(statusCodesBatch.toString().equals(statusCodesAsyncBatch.toString()));
-        assertTrue(costTimeBatch > costTimeAsyncBatch);
+        assertThat(statusCodesBatch).containsExactlyElementsOf(statusCodesAsyncBatch);
+        assertThat(costTimeBatch).isGreaterThan(costTimeAsyncBatch);
     }
 
     @Test
