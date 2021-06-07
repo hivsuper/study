@@ -18,7 +18,7 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <powermock-version>2.0.0-beta.5</powermock-version>
+    <powermock-version>2.0.9</powermock-version>
   </properties>
 
   <dependencies>
@@ -28,12 +28,20 @@
       <version>4.13.1</version>
       <scope>test</scope>
     </dependency>
+<!--    <dependency>-->
+<!--      <groupId>org.mockito</groupId>-->
+<!--      <artifactId>mockito-core</artifactId>-->
+<!--      <version>2.23.4</version>-->
+<!--      <scope>test</scope>-->
+<!--    </dependency>-->
+
     <dependency>
       <groupId>org.mockito</groupId>
-      <artifactId>mockito-core</artifactId>
-      <version>2.15.0</version>
+      <artifactId>mockito-inline</artifactId>
+      <version>3.11.0</version>
       <scope>test</scope>
     </dependency>
+
     <dependency>
       <groupId>org.powermock</groupId>
       <artifactId>powermock-module-junit4</artifactId>
