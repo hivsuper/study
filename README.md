@@ -1,3 +1,6 @@
+All the projects are built on Java 8 and apache maven 3.3.9
+
+----------------------------------------------------
 # bcp-test
 [Using Bulk Copy with the JDBC Driver](https://docs.microsoft.com/en-us/sql/connect/jdbc/using-bulk-copy-with-the-jdbc-driver?view=sql-server-2017)
 
