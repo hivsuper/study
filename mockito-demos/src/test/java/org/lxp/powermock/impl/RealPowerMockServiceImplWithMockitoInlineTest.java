@@ -1,6 +1,7 @@
 package org.lxp.powermock.impl;
 
-import org.junit.Assert;
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Test;
 import org.lxp.powermock.PowerMockHelper;
@@ -22,15 +23,15 @@ public class RealPowerMockServiceImplWithMockitoInlineTest {
 
     @Test
     public void testExecute() {
-        Assert.assertEquals("Super Liaa", realPowerMockService.execute("aa"));
+        MatcherAssert.assertThat(realPowerMockService.execute("aa"), Matchers.is("Super Liaa"));
         try (MockedStatic<PowerMockHelper> theMock = Mockito.mockStatic(PowerMockHelper.class)) {
             theMock.when(PowerMockHelper::getName).thenReturn("bb");
 
-            Assert.assertEquals("bb", PowerMockHelper.getName());
+            MatcherAssert.assertThat(PowerMockHelper.getName(), Matchers.is("bb"));
 
-            Assert.assertEquals("bbaa", realPowerMockService.execute("aa"));
+            MatcherAssert.assertThat(realPowerMockService.execute("aa"), Matchers.is("bbaa"));
         }
-        Assert.assertEquals("Super Liaa", realPowerMockService.execute("aa"));
+        MatcherAssert.assertThat(realPowerMockService.execute("aa"), Matchers.is("Super Liaa"));
     }
 
 }
