@@ -27,7 +27,7 @@ public class ThreadLocalTest {
     }
 
     private static void testDateFormat(String date) throws InterruptedException {
-        multilpleThreadExecute(new Runnable() {
+        multipleThreadExecute(new Runnable() {
             @Override
             public void run() {
                 try {
@@ -39,7 +39,7 @@ public class ThreadLocalTest {
     }
 
     private static void testThreadLocal(String date) throws InterruptedException {
-        multilpleThreadExecute(new Runnable() {
+        multipleThreadExecute(new Runnable() {
             @Override
             public void run() {
                 try {
@@ -50,7 +50,7 @@ public class ThreadLocalTest {
         });
     }
 
-    private static void multilpleThreadExecute(Runnable runnable) throws InterruptedException {
+    private static void multipleThreadExecute(Runnable runnable) throws InterruptedException {
         ExecutorService executorService = Executors.newCachedThreadPool();
         for (int i = 0; i < 10; i++) {
             executorService.execute(runnable);
