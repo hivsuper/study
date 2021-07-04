@@ -17,11 +17,11 @@ public class RealInjectServiceImplTest {
     @Mock
     private InjectService injectService;
     @InjectMocks
-    private RealInjectService realService = new RealInjectServiceImpl();
+    private final RealInjectService realService = new RealInjectServiceImpl();
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
+        MockitoAnnotations.openMocks(this);
         Mockito.when(injectService.getName()).thenReturn("Super Li");
     }
 

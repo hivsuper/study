@@ -11,7 +11,7 @@ import org.lxp.mock.captor.CaptorService;
 import org.lxp.mock.captor.RealCaptorService;
 
 public class RealCaptorServiceImpl implements RealCaptorService {
-    private CaptorService captorService;
+    private final CaptorService captorService;
 
     public RealCaptorServiceImpl(CaptorService captorService) {
         this.captorService = captorService;

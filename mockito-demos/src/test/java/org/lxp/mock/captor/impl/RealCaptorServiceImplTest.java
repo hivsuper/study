@@ -1,15 +1,10 @@
 package org.lxp.mock.captor.impl;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.concurrent.atomic.AtomicBoolean;
-
+import org.assertj.core.api.Assertions;
 import org.awaitility.Awaitility;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.lxp.mock.captor.CaptorModel;
 import org.lxp.mock.captor.CaptorService;
@@ -20,10 +15,12 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import java.util.Collections;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
+
 @RunWith(MockitoJUnitRunner.class)
 public class RealCaptorServiceImplTest {
-    @Rule
-    public ExpectedException expectedException = ExpectedException.none();
     @Mock
     private CaptorService captorService;
     @Captor
@@ -68,12 +65,17 @@ public class RealCaptorServiceImplTest {
     }
 
     @Test
-    public void doThrowRule() {
+    public void doThrowRuleInAssertions() {
         CaptorModel captorModel = new CaptorModel("propertyString", 1);
         Mockito.doThrow(new IllegalArgumentException("s")).when(captorService).execute(captorModel);
-        expectedException.expect(IllegalArgumentException.class);
-        expectedException.expectMessage("s");
-        realCaptorService.execute(captorModel);
+        Assertions.assertThatThrownBy(() -> realCaptorService.execute(captorModel)).isInstanceOf(IllegalArgumentException.class).hasMessageContaining("s");
+    }
+
+    @Test
+    public void doThrowRuleInAssert() {
+        CaptorModel captorModel = new CaptorModel("propertyString", 1);
+        Mockito.doThrow(new IllegalArgumentException("s")).when(captorService).execute(captorModel);
+        Assert.assertThrows("s", IllegalArgumentException.class, () -> realCaptorService.execute(captorModel));
     }
 
     @Test
@@ -94,7 +96,7 @@ public class RealCaptorServiceImplTest {
         Mockito.doReturn("1", "a", "b").when(captorService).execute(Mockito.any(CaptorModel.class));
         List<String> rtn = realCaptorService.execute(4);
         Mockito.verify(captorService, Mockito.times(3)).execute(Mockito.any(CaptorModel.class));
-        Assert.assertEquals("[1, a, b]", rtn.toString());
+        Assertions.assertThat(rtn).containsExactly("1", "a", "b");
     }
 
     @Test
@@ -102,13 +104,13 @@ public class RealCaptorServiceImplTest {
         // 测试模拟
         RealCaptorService spy = Mockito.spy(new RealCaptorServiceImpl(captorService));
         Mockito.doReturn(Collections.singletonList("1")).when(spy).execute(Mockito.eq(4));
-        Assert.assertEquals("[1]", spy.execute(4).toString());
+        Assertions.assertThat(spy.execute(4)).containsExactly("1");
 
         // 测试真实调用
         Mockito.doReturn("1", "a").when(captorService).execute(Mockito.any(CaptorModel.class));
         List<String> rtn = spy.execute(3);
         Mockito.verify(captorService, Mockito.times(2)).execute(Mockito.any(CaptorModel.class));
-        Assert.assertEquals("[1, a]", rtn.toString());
+        Assertions.assertThat(rtn).containsExactly("1", "a");
     }
 
 }
